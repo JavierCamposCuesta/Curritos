@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CategoriaService } from '../../services/categoria.service';
-import { Categoria } from '../../interfaces/categoria.interface';
+import { Categoria } from '../../interfaces/interface';
 
 @Component({
   selector: 'app-carrusel',
@@ -16,17 +16,17 @@ export class CarruselComponent implements OnInit {
       this.responsiveOptions = [
         {
             breakpoint: '1024px',
-            numVisible: 7,
+            numVisible: 6,
             numScroll: 3
         },
         {
             breakpoint: '768px',
-            numVisible: 5,
+            numVisible: 4,
             numScroll: 2
         },
         {
             breakpoint: '560px',
-            numVisible: 3,
+            numVisible: 2,
             numScroll: 1
         }
     ];

@@ -5,6 +5,7 @@ import { FooterComponent } from './footer/footer.component';
 import { SearchComponent } from './search/search.component';
 import { HeaderComponent } from './header/header.component';
 import { SubMenuComponent } from './sub-menu/sub-menu.component';
+import { FavoritesComponent } from '../profile/favorites/favorites.component';
 
 
 
@@ -17,7 +18,7 @@ import { SubMenuComponent } from './sub-menu/sub-menu.component';
     SubMenuComponent    
   ],
   imports: [
-    CommonModule,
+    CommonModule
   ],
   exports:[
     SidebarComponent,
