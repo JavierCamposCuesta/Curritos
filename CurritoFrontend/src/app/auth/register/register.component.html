@@ -83,8 +83,11 @@
            
 
             <button class="btn btn-primary btn-lg btn-block w-50 ms-auto me-auto" type="submit" [disabled]="!miFormulario.valid">Registrarme</button>
+               
           </form>
-
+          <div class="mt-1">
+            <a [routerLink]="['/login']">Iniciar sesión</a>
+          </div>
             <hr class="my-4">
 
               <div class="d-grid gap-2">

@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { FormBuilder, FormGroup} from '@angular/forms';
-import { EmailValidatorService } from 'src/app/services/email-validator.service';
 import { ValidatorRegistroService } from 'src/app/services/validatorRegistro.service';
-import { LoginService } from 'src/app/services/login.service';
-import { map } from 'rxjs';
 import { LoginRespuesta } from 'src/app/interfaces/interface';
 
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
+import { LoginService } from 'src/app/services/login.service';
 
 @Component({
   selector: 'app-login',
@@ -39,8 +38,8 @@ get emailErrorMsg(): string {
 }
   constructor( private fb: FormBuilder,
     private ValidatorRegistroService: ValidatorRegistroService,
-    private emailValidator: EmailValidatorService,
-    private loginService: LoginService ) { }
+    private loginService: LoginService,
+    private router: Router ) { }
 
 
     ngOnInit(): void {
@@ -87,10 +86,11 @@ get emailErrorMsg(): string {
       let respuesta: LoginRespuesta = {};
       this.loginService.login(this.miFormulario.get("email")?.value, this.miFormulario.get("password")?.value).subscribe({
         
-         next(resp) {
+        next: resp => {
           respuesta = resp;
           if(respuesta.jwt_token != null){
             localStorage.setItem('jwt', respuesta.jwt_token);
+            this.router.navigate(['home']);
             solucion = "true";
           }
         },
@@ -104,7 +104,7 @@ get emailErrorMsg(): string {
             confirmButtonText: 'Ok'
           })
         }
-
+        
         
         
         

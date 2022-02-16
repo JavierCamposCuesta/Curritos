@@ -10,6 +10,8 @@ import { HomeModule } from './home/home.module';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthModule } from './auth/auth.module';
 import { AuthGuard } from './services/auth-guard.service';
+import { RouterModule } from '@angular/router';
+import { ProfileModule } from './profile/profile.module';
 
 
 @NgModule({
@@ -23,7 +25,9 @@ import { AuthGuard } from './services/auth-guard.service';
     SharedModule,
     HomeModule,
     HttpClientModule,
-    AuthModule
+    AuthModule,
+    RouterModule,
+    ProfileModule
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent]

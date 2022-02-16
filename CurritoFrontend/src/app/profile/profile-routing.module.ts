@@ -1,14 +1,16 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from '../services/auth-guard.service';
+import { AddCurritoComponent } from './add-currito/add-currito.component';
 import { FavoritesComponent } from './favorites/favorites.component';
 
 
 
 const routes: Routes = [
   // {
-    { path: '', redirectTo: 'favorites'},
+    
     { path: 'favorites',canActivate:[AuthGuard], component: FavoritesComponent },
+    { path: 'addCurrito',canActivate:[AuthGuard], component: AddCurritoComponent },
     { path: '**', redirectTo: 'favorites' }
     // path:'', canActivateChild:[AuthGuard], component: FavoritesComponent,
     // children: [

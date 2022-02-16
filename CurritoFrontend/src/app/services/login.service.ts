@@ -15,7 +15,7 @@ private estado: boolean = false;
 
   constructor( private http: HttpClient, private router:Router ) { }
 
-  login(email:string, password:string){
+  login(email:string, password:string): Observable<LoginRespuesta>{
     const url = `${this.baseUrl}/login`;
     
     const body = {

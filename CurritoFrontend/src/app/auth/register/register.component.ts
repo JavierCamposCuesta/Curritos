@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, Validators } from '@angular/forms';
 import { FormBuilder, FormGroup} from '@angular/forms';
-import { EmailValidatorService } from 'src/app/services/email-validator.service';
 import { ValidatorRegistroService } from 'src/app/services/validatorRegistro.service';
 import { LoginRespuesta } from 'src/app/interfaces/interface';
 import { environment } from '../../../environments/environment';
 import Swal from 'sweetalert2';
 import { HttpClient } from '@angular/common/http';
 import { RegisterService } from 'src/app/services/register.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -48,7 +48,7 @@ get emailErrorMsg(): string {
     return 'El valor ingresado no tiene formato de correo';
   }
   else if ( errors['emailTomado'] ) {
-    return 'El email ya fue tomado';
+    return 'El email ya está en uso';
   }
   
   return '';
@@ -60,9 +60,9 @@ get emailErrorMsg(): string {
 
 constructor( private fb: FormBuilder,
   private ValidatorRegistroService: ValidatorRegistroService,
-  private emailValidator: EmailValidatorService,
   private registerService: RegisterService,
-  private http: HttpClient ) { }
+  private http: HttpClient,
+  private router:Router ) { }
   
   
   ngOnInit(): void {
@@ -152,7 +152,7 @@ constructor( private fb: FormBuilder,
     }
     this.registerService.register(user).subscribe({
         
-      next(resp) {
+      next:resp => {
         respuesta = resp;
         console.log(respuesta.jwt_token)
         console.log("hora si cojones")
@@ -160,6 +160,7 @@ constructor( private fb: FormBuilder,
        if(respuesta.jwt_token != null){
          console.log(respuesta.jwt_token)
          localStorage.setItem('jwt', respuesta.jwt_token);
+         this.router.navigate(['home']);
          solucion = "true";
        }
      },

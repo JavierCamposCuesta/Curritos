@@ -23,3 +23,12 @@ export interface Usuario {
     fechaNacimiento?: string;
     ubicacion?: string;
 }
+
+export interface Anuncio {
+    id?: number;
+    titulo?: string;
+    precio?: number;
+    descripcion?: string;
+    categoria?: string;
+    tipoPrecio?: string;
+}

@@ -21,16 +21,7 @@ export class ValidatorRegistroService implements AsyncValidator{
   constructor(private http: HttpClient) { }
 
 
-  // noPuedeSerStrider( control: FormControl ): ValidationErrors | null {
-  //     const valor:string = control.value?.trim().toLowerCase();
-  //     if ( valor === 'strider' ) {
-  //       return {
-  //         noStrider: true
-  //       }
-  //     } 
-
-  //   return null;
-  // }
+  
 
   /**
    * Este método validará que ambas contraseñas introducidas son iguales
@@ -76,7 +67,7 @@ export class ValidatorRegistroService implements AsyncValidator{
     return this.http.get<any[]>(`http://localhost:8080/usuario?email=${ email}`)
                 .pipe(
                   //Timpo de respuesta en comprobar el resultado
-                   delay(3000),
+                   delay(1500),
                   map( resp => {
                     if(resp != null && resp.length == undefined){
                                 respuesta = "valido";

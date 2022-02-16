@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-favorites',
@@ -11,5 +11,7 @@ export class FavoritesComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  
 
 }

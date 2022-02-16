@@ -6,6 +6,9 @@ import { SearchComponent } from './search/search.component';
 import { HeaderComponent } from './header/header.component';
 import { SubMenuComponent } from './sub-menu/sub-menu.component';
 import { FavoritesComponent } from '../profile/favorites/favorites.component';
+import { AppRoutingModule } from '../app-routing.module';
+import { RouterModule } from '@angular/router';
+import { UploadImageComponent } from './upload-image/upload-image.component';
 
 
 
@@ -15,17 +18,20 @@ import { FavoritesComponent } from '../profile/favorites/favorites.component';
     FooterComponent,
     SearchComponent,
     HeaderComponent,
-    SubMenuComponent    
+    SubMenuComponent,
+    UploadImageComponent    
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule
   ],
   exports:[
     SidebarComponent,
     FooterComponent,
     SearchComponent,
     HeaderComponent,
-    SubMenuComponent 
+    SubMenuComponent,
+    UploadImageComponent 
   ]
 })
 export class SharedModule { }

@@ -3,10 +3,10 @@
       <div class="row d-flex justify-content-center align-items-center h-75">
         <div class="col-12 col-md-8 col-lg-6 col-xl-5">
           <div class="card shadow-2-strong border-3" style="border-radius: 1rem;">
-            <div class="card-body p-5 text-center">
+            <div class="card-body p-5 pt-3 text-center">
   
-              <h2 class="mb-3">¡Bienvenido de nuevo!</h2>
-              <h5 class="mb-5">Introduce tus credenciales para inciar sesión</h5>
+              <h2 class="mb-3 mt-0 pt-0">¡Bienvenido de nuevo!</h2>
+              <!-- <h5 class="mb-5">Introduce tus credenciales para inciar sesión</h5> -->
 
               <form autocomplete="off"  [formGroup]="miFormulario" (ngSubmit) = "submitFormulario()">
               <div class="form-outline mb-4">
@@ -23,8 +23,12 @@
   
              
   
-              <button class="btn btn-primary btn-lg btn-block" type="submit">Login</button>
+              <button class="btn btn-primary btn-lg btn-block" type="submit">Iniciar sesión</button>
             </form>
+
+            <div class="mt-1">
+              <a [routerLink]="['/register']">Regístrate</a>
+            </div>
   
               <hr class="my-4">
   

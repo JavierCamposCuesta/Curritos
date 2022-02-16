@@ -9,6 +9,9 @@ import { MessagesComponent } from './messages/messages.component';
 import { ProfileComponent } from './profile/profile.component';
 import { MisCurritosComponent } from './mis-curritos/mis-curritos.component';
 import { OpinionsComponent } from './opinions/opinions.component';
+import { RouterModule } from '@angular/router';
+import { AddCurritoComponent } from './add-currito/add-currito.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -18,12 +21,16 @@ import { OpinionsComponent } from './opinions/opinions.component';
     MessagesComponent,
     ProfileComponent,
     MisCurritosComponent,
-    OpinionsComponent
+    OpinionsComponent,
+    AddCurritoComponent
   ],
   imports: [
     CommonModule,
     ProfileRoutingModule,
-    SharedModule
+    SharedModule,
+    RouterModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: []
 })

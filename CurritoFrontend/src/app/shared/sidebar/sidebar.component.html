@@ -1,282 +1,42 @@
-<!-- <div class="w-100 d-flex row"> -->
-  <!-- <div class="p-3 col-4 w-25" style="background: rgba(189, 189, 189, 0.562)"> -->
 
+    <div class="p-3 ps-0 pe-0 col-4 position-fixed h-100 d-none d-lg-block" style="background: rgba(211, 211, 211, 0.562); width: 20%; z-index: 1;">
     <ul class="nav flex-column">
-      <li class="nav-item w-100">
-        <a class="nav-link navy d-flex" href="#">
-          <span class="bi bi-person-circle navy p-2 fs-1"></span>
-          <span class="fs-4 mt-3 p-1">Mi Perfil</span>
+      <li class="nav-item w-100 liBoton">
+        <a class="nav-link navy d-flex" [routerLink]="['/profile/profile']" routerLinkActive="active">
+          <span class="bi bi-person-circle navy p-2 fs-3"></span>
+          <span class="fs-6 mt-3 p-1">Mi Perfil</span>
         </a>
       </li>
-      <li class="nav-item w-100">
-        <a class="nav-link navy d-flex" href="#">
-          <span class="bi bi-briefcase navy p-2 fs-1"></span>
-          <span class="fs-4 mt-3 p-1">Mis Currito's</span>
+      <li class="nav-item w-100 liBoton">
+        <a class="nav-link navy d-flex" [routerLink]="['/profile/misCurritos']" routerLinkActive="active">
+          <span class="bi bi-briefcase navy p-2 fs-3"></span>
+          <span class="fs-6 mt-3 p-1">Mis Currito's</span>
         </a>
       </li>
-      <li class="nav-item w-100">
-        <a class="nav-link navy d-flex" href="#">
-          <span class="bi bi-chat-dots navy p-2 fs-1"></span>
-          <span class="fs-4 mt-3 p-1">Mensajes</span>
+      <li class="nav-item w-100 liBoton">
+        <a class="nav-link navy d-flex" [routerLink]="['/profile/messages']" routerLinkActive="active">
+          <span class="bi bi-chat-dots navy p-2 fs-3"></span>
+          <span class="fs-6 mt-3 p-1">Mensajes</span>
         </a>
       </li>
-      <li class="nav-item w-100">
-        <a class="nav-link navy d-flex" href="#">
-          <span class="bi bi-bookmark-heart navy p-2 fs-1"></span>
-          <span class="fs-4 mt-3 p-1">Favoritos</span>
+      <li class="nav-item w-100 liBoton">
+        <a class="nav-link navy d-flex" [routerLink]="['/profile/favorites']" routerLinkActive="active">
+          <span class="bi bi-bookmark-heart navy p-2 fs-3"></span>
+          <span class="fs-6 mt-3 p-1">Favoritos</span>
         </a>
       </li>
-      <li class="nav-item w-100">
-        <a class="nav-link navy d-flex" href="#">
-          <span class="bi bi-star-half navy p-2 fs-1"></span>
-          <span class="fs-4 mt-3 p-1">Opiniones</span>
+      <li class="nav-item w-100 liBoton">
+        <a class="nav-link navy d-flex" [routerLink]="['/profile/opinions']" routerLinkActive="active">
+          <span class="bi bi-star-half navy p-2 fs-3"></span>
+          <span class="fs-6 mt-3 p-1">Opiniones</span>
+        </a>
+      </li>
+      <li class="nav-item w-100 liBoton mt-4">
+        <a class="nav-link navy d-flex" (click)="cerrarSesion()" href="#">
+          <span class="bi bi-person-x-fill navy p-2 fs-3"></span>
+          <span class="fs-6 mt-3 p-1">Cerrar sesión</span>
         </a>
       </li>
     </ul>
-
-  <!-- </div> -->
-
-  <!-- <div class="col-8 w-75">
-    <div
-      class="p-5 card-group d-flex justify-content-center row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-4 g-2 w-100">
-
-      
-      <div class="col">
-        <div class="card ">
-          <div class="card-body p-3">
-            <div class="d-flex">
-              <div class="w-50">
-                <i class="bi bi-apple navy" style="font-size: 5em"></i>
-              </div>
-              <div class="w-50 navy">
-                <h5>Burguillos, Sevilla</h5>
-                <input class="btn text-white w-100" style="background: navy" value="20€" />
-              </div>
-            </div>
-            <div class="navy">
-              <h3 class="card-title text-center">Cortar el césped</h3>
-              <p class="card-text">
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been the industry's standard dummy text
-                ever since the 1500s, when an unknown printer took a galley of
-                type and scrambled it to make a type specimen book.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-     
-
-      <div class="col">
-        <div class="card ">
-          <div class="card-body p-3">
-            <div class="d-flex">
-              <div class="w-50">
-                <i class="bi bi-tree-fill navy" style="font-size: 5em"></i>
-              </div>
-              <div class="w-50 navy">
-                <h5>Burguillos, Sevilla</h5>
-                <input class="btn text-white w-100" style="background: navy" value="20€" />
-              </div>
-            </div>
-            <div class="navy">
-              <h3 class="card-title text-center">Cortar el césped</h3>
-              <p class="card-text">
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been the industry's standard dummy text
-                ever since the 1500s, when an unknown printer took a galley of
-                type and scrambled it to make a type specimen book.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-       
-
-       <div class="col">
-        <div class="card ">
-          <div class="card-body p-3">
-            <div class="d-flex">
-              <div class="w-50">
-                <i class="bi bi-tree-fill navy" style="font-size: 5em"></i>
-              </div>
-              <div class="w-50 navy">
-                <h5>Burguillos, Sevilla</h5>
-                <input class="btn text-white w-100" style="background: navy" value="20€" />
-              </div>
-            </div>
-            <div class="navy">
-              <h3 class="card-title text-center">Cortar el césped</h3>
-              <p class="card-text">
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been the industry's standard dummy text
-                ever since the 1500s, when an unknown printer took a galley of
-                type and scrambled it to make a type specimen book.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-
-       <div class="col">
-        <div class="card ">
-          <div class="card-body p-3">
-            <div class="d-flex">
-              <div class="w-50">
-                <i class="bi bi-tree-fill navy" style="font-size: 5em"></i>
-              </div>
-              <div class="w-50 navy">
-                <h5>Burguillos, Sevilla</h5>
-                <input class="btn text-white w-100" style="background: navy" value="20€" />
-              </div>
-            </div>
-            <div class="navy">
-              <h3 class="card-title text-center">Cortar el césped</h3>
-              <p class="card-text">
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been the industry's standard dummy text
-                ever since the 1500s, when an unknown printer took a galley of
-                type and scrambled it to make a type specimen book.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-       
-
-       <div class="col">
-        <div class="card ">
-          <div class="card-body p-3">
-            <div class="d-flex">
-              <div class="w-50">
-                <i class="bi bi-tree-fill navy" style="font-size: 5em"></i>
-              </div>
-              <div class="w-50 navy">
-                <h5>Burguillos, Sevilla</h5>
-                <input class="btn text-white w-100" style="background: navy" value="20€" />
-              </div>
-            </div>
-            <div class="navy">
-              <h3 class="card-title text-center">Cortar el césped</h3>
-              <p class="card-text">
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been the industry's standard dummy text
-                ever since the 1500s, when an unknown printer took a galley of
-                type and scrambled it to make a type specimen book.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-       
-
-       <div class="col">
-        <div class="card ">
-          <div class="card-body p-3">
-            <div class="d-flex">
-              <div class="w-50">
-                <i class="bi bi-tree-fill navy" style="font-size: 5em"></i>
-              </div>
-              <div class="w-50 navy">
-                <h5>Burguillos, Sevilla</h5>
-                <input class="btn text-white w-100" style="background: navy" value="20€" />
-              </div>
-            </div>
-            <div class="navy">
-              <h3 class="card-title text-center">Cortar el césped</h3>
-              <p class="card-text">
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been the industry's standard dummy text
-                ever since the 1500s, when an unknown printer took a galley of
-                type and scrambled it to make a type specimen book.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-       
-
-       <div class="col">
-        <div class="card ">
-          <div class="card-body p-3">
-            <div class="d-flex">
-              <div class="w-50">
-                <i class="bi bi-tree-fill navy" style="font-size: 5em"></i>
-              </div>
-              <div class="w-50 navy">
-                <h5>Burguillos, Sevilla</h5>
-                <input class="btn text-white w-100" style="background: navy" value="20€" />
-              </div>
-            </div>
-            <div class="navy">
-              <h3 class="card-title text-center">Cortar el césped</h3>
-              <p class="card-text">
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been the industry's standard dummy text
-                ever since the 1500s, when an unknown printer took a galley of
-                type and scrambled it to make a type specimen book.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="col">
-        <div class="card ">
-          <div class="card-body p-3">
-            <div class="d-flex">
-              <div class="w-50">
-                <i class="bi bi-tree-fill navy" style="font-size: 5em"></i>
-              </div>
-              <div class="w-50 navy">
-                <h5>Burguillos, Sevilla</h5>
-                <input class="btn text-white w-100" style="background: navy" value="20€" />
-              </div>
-            </div>
-            <div class="navy">
-              <h3 class="card-title text-center">Cortar el césped</h3>
-              <p class="card-text">
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been the industry's standard dummy text
-                ever since the 1500s, when an unknown printer took a galley of
-                type and scrambled it to make a type specimen book.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="col">
-        <div class="card ">
-          <div class="card-body p-3">
-            <div class="d-flex">
-              <div class="w-50">
-                <i class="bi bi-tree-fill navy" style="font-size: 5em"></i>
-              </div>
-              <div class="w-50 navy">
-                <h5>Burguillos, Sevilla</h5>
-                <input class="btn text-white w-100" style="background: navy" value="20€" />
-              </div>
-            </div>
-            <div class="navy">
-              <h3 class="card-title text-center">Cortar el césped</h3>
-              <p class="card-text">
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been the industry's standard dummy text
-                ever since the 1500s, when an unknown printer took a galley of
-                type and scrambled it to make a type specimen book.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="d-flex justify-content-center p-5">
-      <a href="#" class="text-decoration-none" style="color: navy">Ver más...</a>
-    </div>
-  </div> -->
-
-<!-- </div> -->
+  </div>
+ 
