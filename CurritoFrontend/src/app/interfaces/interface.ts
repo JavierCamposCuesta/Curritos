@@ -4,6 +4,13 @@ export interface Categoria {
     icono: string;
 }
 
+export interface Data {
+    data:Categoria[],
+    page:number,
+    limit:number
+    
+}
+
 export interface LoginRespuesta {
     jwt_token?: string;
     timestamp?: Date;
@@ -24,11 +31,24 @@ export interface Usuario {
     ubicacion?: string;
 }
 
+// export interface Anuncio {
+//     id?: number;
+//     titulo?: string;
+//     precio?: number;
+//     descripcion?: string;
+//     categoria?: string;
+//     tipoPrecio?: string;
+// }
+
 export interface Anuncio {
-    id?: number;
-    titulo?: string;
-    precio?: number;
-    descripcion?: string;
-    categoria?: string;
-    tipoPrecio?: string;
+    id?:           number;
+    titulo?:       string;
+    precio?:       number;
+    descripcion?:  null | string;
+    categoria?:    string;
+    finalizado?:   boolean;
+    fechaAnuncio?: Date;
+    fechaFin?:     null | Date;
+    tipoPrecio?:   string;
 }
+

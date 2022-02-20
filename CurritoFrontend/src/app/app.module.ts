@@ -12,6 +12,9 @@ import { AuthModule } from './auth/auth.module';
 import { AuthGuard } from './services/auth-guard.service';
 import { RouterModule } from '@angular/router';
 import { ProfileModule } from './profile/profile.module';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+
+
 
 
 @NgModule({
@@ -27,7 +30,8 @@ import { ProfileModule } from './profile/profile.module';
     HttpClientModule,
     AuthModule,
     RouterModule,
-    ProfileModule
+    ProfileModule,
+    BrowserAnimationsModule
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent]

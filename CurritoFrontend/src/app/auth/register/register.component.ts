@@ -78,33 +78,34 @@ constructor( private fb: FormBuilder,
   }
   campoNoValido( campo: string ) {
    
-    // this.findInvalidControlsRecursive(this.miFormulario);
+    this.findInvalidControlsRecursive(this.miFormulario);
     return this.miFormulario.get(campo)?.invalid
     && this.miFormulario.get(campo)?.touched;
   }
 
-  // public findInvalidControlsRecursive(formToInvestigate:FormGroup|FormArray):string[] {
-  //   var invalidControls:string[] = [];
-  //   let recursiveFunc = (form:FormGroup|FormArray) => {
-  //     Object.keys(form.controls).forEach(field => { 
-  //       const control = form.get(field);
-  //       if (control?.invalid) invalidControls.push(field);
-  //       if (control instanceof FormGroup) {
-  //         recursiveFunc(control);
-  //       } else if (control instanceof FormArray) {
-  //         recursiveFunc(control);
-  //       }        
-  //     });
-  //   }
-  //   recursiveFunc(formToInvestigate);
-  //   console.log(invalidControls)
-  //   console.log(this.miFormulario.valid + "gfgdfgdgdfgfdgfdgdfg")
-  //   return invalidControls;
-  // }
+  /**
+   * Metodo para ver donde falla el formulario
+   */
+  public findInvalidControlsRecursive(formToInvestigate:FormGroup|FormArray):string[] {
+    var invalidControls:string[] = [];
+    let recursiveFunc = (form:FormGroup|FormArray) => {
+      Object.keys(form.controls).forEach(field => { 
+        const control = form.get(field);
+        if (control?.invalid) invalidControls.push(field);
+        if (control instanceof FormGroup) {
+          recursiveFunc(control);
+        } else if (control instanceof FormArray) {
+          recursiveFunc(control);
+        }        
+      });
+    }
+    recursiveFunc(formToInvestigate);
+    console.log(invalidControls)
+    console.log(this.miFormulario.valid + "gfgdfgdgdfgfdgfdgdfg")
+    return invalidControls;
+  }
   
-  // comprobarEmailDisponible(){
-    //   this.emailValidator.validarEmail;
-    // }
+  
     
     
     
@@ -154,11 +155,7 @@ constructor( private fb: FormBuilder,
         
       next:resp => {
         respuesta = resp;
-        console.log(respuesta.jwt_token)
-        console.log("hora si cojones")
-        // console.log(repuesta.jwt_token)
        if(respuesta.jwt_token != null){
-         console.log(respuesta.jwt_token)
          localStorage.setItem('jwt', respuesta.jwt_token);
          this.router.navigate(['home']);
          solucion = "true";

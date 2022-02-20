@@ -1,0 +1,29 @@
+.focusBorrar:hover {
+    color: red;
+}
+.focusEditar:hover {
+    color: blue;
+}
+.focusFinalizado:hover {
+    color: green;
+}
+
+
+
+
+
+
+
+
+.ocultarMayor679 {
+    display: none !important;
+}
+@media screen and (max-width: 750px) {
+    .ocultarMayor679 {
+        display: flex !important;
+    }
+
+    .ocultarMenor680 {
+        display: none !important;
+    }
+  }

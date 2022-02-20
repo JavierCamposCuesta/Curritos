@@ -6,17 +6,23 @@ import { SidebarComponent } from '../shared/sidebar/sidebar.component';
 import { SharedModule } from '../shared/shared.module';
 import { AuthGuard } from '../services/auth-guard.service';
 import { MessagesComponent } from './messages/messages.component';
-import { ProfileComponent } from './profile/profile.component';
 import { MisCurritosComponent } from './mis-curritos/mis-curritos.component';
 import { OpinionsComponent } from './opinions/opinions.component';
 import { RouterModule } from '@angular/router';
 import { AddCurritoComponent } from './add-currito/add-currito.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { TableModule } from 'primeng/table';
+import { PaginatorModule } from 'primeng/paginator';
+import { CardModule } from 'primeng/card';
+import {DialogModule} from 'primeng/dialog';
+import { ProfileComponent } from './profile.component';
+import {ToastModule} from 'primeng/toast';
+import { MessageService } from 'primeng/api';
 
 
 @NgModule({
   declarations: [
+    ProfileComponent,
     FavoritesComponent,
     MessagesComponent,
     ProfileComponent,
@@ -30,8 +36,16 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     SharedModule,
     RouterModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TableModule,
+    PaginatorModule,
+    CardModule,
+    DialogModule,
+    ToastModule
+    
   ],
-  exports: []
+  exports: [
+  ],
+  providers: [MessageService]
 })
 export class ProfileModule { }

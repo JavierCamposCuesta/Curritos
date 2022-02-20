@@ -2,3 +2,27 @@
 .navy{
     color: navy;
   }
+
+  
+  
+
+  @media (min-width: 992px){
+    .profileAdapterlg{
+      margin-left: 20%;
+      margin-right: 0;
+      width: 75%;
+    }
+    
+  }
+  @media (min-width: 961px) and (max-width: 991px){
+    .profileAdaptermd{
+      margin-left: 0;
+      margin-right: 0;
+      width: 100%;
+      /* display: block !important; */
+    }
+  }
+
+  @media (max-width: 960px){
+    
+  }

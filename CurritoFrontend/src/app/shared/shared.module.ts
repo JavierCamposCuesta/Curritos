@@ -9,6 +9,7 @@ import { FavoritesComponent } from '../profile/favorites/favorites.component';
 import { AppRoutingModule } from '../app-routing.module';
 import { RouterModule } from '@angular/router';
 import { UploadImageComponent } from './upload-image/upload-image.component';
+import { CardAnuncioComponent } from './card-anuncio/card-anuncio.component';
 
 
 
@@ -19,7 +20,8 @@ import { UploadImageComponent } from './upload-image/upload-image.component';
     SearchComponent,
     HeaderComponent,
     SubMenuComponent,
-    UploadImageComponent    
+    UploadImageComponent,
+    CardAnuncioComponent    
   ],
   imports: [
     CommonModule,

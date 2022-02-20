@@ -1,14 +1,14 @@
 <div class="p-5 content-section implementation carousel-demo">
     <div class="card" style="border: 0px">
       <p-carousel
-        [value]="listaCategorias"
+        [value]="listaCategorias.data"
         styleClass="custom-carousel"
         [numVisible]="6"
         [numScroll]="1"
-        [circular]="true"
+        [circular]="false"
         [autoplayInterval]="2000"
         [responsiveOptions]="responsiveOptions"
-        [showIndicators]="false"
+        [showIndicators]="true"
         style="background-color: rgba(226, 226, 226, 0.342)"
       >
         <ng-template let-categoria pTemplate="item">

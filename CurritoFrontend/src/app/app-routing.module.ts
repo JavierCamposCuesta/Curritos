@@ -4,6 +4,7 @@ import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { HomeComponent } from './home/home/home.component';
 import { FavoritesComponent } from './profile/favorites/favorites.component';
+import { ProfileComponent } from './profile/profile.component';
 import { AuthGuard } from './services/auth-guard.service';
 
 
@@ -28,6 +29,7 @@ const routes: Routes = [
 },
 { 
   path: 'profile',
+  component: ProfileComponent,
   loadChildren: () => import('./profile/profile.module').then( m => m.ProfileModule ), canLoad:[AuthGuard]
 },
   {

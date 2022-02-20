@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { Categoria } from '../interfaces/interface';
+import { Categoria, Data } from '../interfaces/interface';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +17,6 @@ export class CategoriaService {
   mostrarCategorias(){
     const url = `${this.baseUrl}/categorias`;
     
-    return this.http.get<Categoria[]>(url);
+    return this.http.get<Data>(url);
   }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CategoriaService } from '../../services/categoria.service';
-import { Categoria } from '../../interfaces/interface';
+import { Categoria, Data } from '../../interfaces/interface';
 
 @Component({
   selector: 'app-carrusel',
@@ -10,7 +10,11 @@ import { Categoria } from '../../interfaces/interface';
 export class CarruselComponent implements OnInit {
   images: any; 
   responsiveOptions;
-  listaCategorias:Categoria[]=[];
+  listaCategorias:Data={
+    data:[],
+    page:0,
+    limit:0
+  };
 
   constructor(private categoriaService: CategoriaService) {
       this.responsiveOptions = [

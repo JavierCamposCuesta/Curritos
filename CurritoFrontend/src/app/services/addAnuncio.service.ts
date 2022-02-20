@@ -15,12 +15,12 @@ export class addAnuncioService {
    * @param user 
    * @returns Un observable con el resultado de la petición
    */
- addAnuncio(anuncio:Anuncio){
-    const url = `${this.baseUrl}/addAnuncio`;
-    const headers = new HttpHeaders()
-      .set('Authorization', `Bearer ${localStorage.getItem('jwt')}` || '' );
-      return this.http.post(url, anuncio, {headers});
-  }
+//  addAnuncio(anuncio:Anuncio){
+//     const url = `${this.baseUrl}/anuncio`;
+//     const headers = new HttpHeaders()
+//       .set('Authorization', `Bearer ${localStorage.getItem('jwt')}` || '' );
+//       return this.http.post(url, anuncio, {headers});
+//   }
 
   upload(file:File){
     // Crear formdata y agregar los datos a formdataz

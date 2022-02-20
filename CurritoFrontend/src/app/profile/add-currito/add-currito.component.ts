@@ -1,9 +1,11 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
+import { waitForAsync } from '@angular/core/testing';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Categoria, LoginRespuesta } from 'src/app/interfaces/interface';
+import { Anuncio, Categoria, Data, LoginRespuesta } from 'src/app/interfaces/interface';
 import { addAnuncioService } from 'src/app/services/addAnuncio.service';
+import { AnuncioService } from 'src/app/services/anuncio.service';
 import { CategoriaService } from 'src/app/services/categoria.service';
 import { RegisterService } from 'src/app/services/register.service';
 import { ValidatorRegistroService } from 'src/app/services/validatorRegistro.service';
@@ -15,9 +17,24 @@ import Swal from 'sweetalert2';
   templateUrl: './add-currito.component.html',
   styleUrls: ['./add-currito.component.css']
 })
+
+
 export class AddCurritoComponent implements OnInit {
 
+  /**
+   * Comprobamos si es un anuncio para editar o no
+   */
+  @Input() edit=false;
+
+  /**
+   * Con esto conseguimos el anuncio que queremos editar, el cual lleva consigo el id del anuncio
+   */
+  @Input() anuncioEditar:Anuncio= {};
+  titulo:string='';
+  botonRegistro:string = '';
+
   
+
   miFormulario: FormGroup = this.fb.group({
     titulo: ['', [Validators.required]],
     categoria: ['', [ Validators.required]],
@@ -26,6 +43,7 @@ export class AddCurritoComponent implements OnInit {
     descripcion: [''  ],
     // file: ['', [ Validators.required, Validators.pattern(this.ValidatorRegistroService.nombrePattern)]  ],
     ubicacion: ['' ],
+    id:['']
   },
   {
   
@@ -41,7 +59,8 @@ export class AddCurritoComponent implements OnInit {
     private http: HttpClient,
     private router:Router,
     private categoriaService:CategoriaService,
-    private addAnuncioService: addAnuncioService ) { }
+    private addAnuncioService: addAnuncioService,
+    private anuncioService: AnuncioService ) { }
     
     
     ngOnInit(): void {
@@ -52,10 +71,34 @@ export class AddCurritoComponent implements OnInit {
         precio: '',
         tipoPrecio: '',
         descripcion: '',
-        ubicacion: ''
+        ubicacion: '',
+        id:''
       })
 
+      this.titulo = "Nuevo Currito";
+      this.botonRegistro ="Subir anuncio";
+
+
+
       this.mostrarCategorias();
+    }
+
+    /**
+     * Si accedemos a este componente a través de editar anuncio, rellenaremos los campos con el anuncio que nos hemos traido
+     */
+    ngOnChanges(): void{
+      this.miFormulario.reset({
+        titulo: this.anuncioEditar.titulo,
+        categoria: this.anuncioEditar.categoria,
+        precio: this.anuncioEditar.precio,
+        tipoPrecio: this.anuncioEditar.tipoPrecio,
+        descripcion: this.anuncioEditar.descripcion,
+        ubicacion: '',
+        id: this.anuncioEditar.id
+      })
+
+      this.titulo= "Editar Currito";
+      this.botonRegistro = "Actualizar anuncio"
     }
     
     campoNoValido( campo: string ) {
@@ -70,7 +113,13 @@ export class AddCurritoComponent implements OnInit {
        */
       submitFormulario() {
       
-        this.addCurrito()
+        if(this.botonRegistro == 'Actualizar anuncio'){
+          this.editarAnuncio();
+        }
+        else{
+          this.addCurrito()
+
+        }
        
       
         this.miFormulario.markAllAsTouched();
@@ -98,7 +147,8 @@ export class AddCurritoComponent implements OnInit {
           
   
       }
-      this.addAnuncioService.addAnuncio(anuncio).subscribe({
+      console.log(this.miFormulario);
+      this.anuncioService.addAnuncio(anuncio).subscribe({
           
         next:resp => {
           respuesta = resp;
@@ -111,9 +161,9 @@ export class AddCurritoComponent implements OnInit {
        },
        error(error){
          solucion = "error";
-         localStorage.removeItem('jwt');
+        //  localStorage.removeItem('jwt');
          Swal.fire({
-           title: 'Error al inciar sesión',
+           title: 'Error al crear anuncio',
            text: 'Vuelve a intentarlo',
            icon: 'error',
            confirmButtonText: 'Ok'
@@ -125,8 +175,66 @@ export class AddCurritoComponent implements OnInit {
        
      })
       }
+
+      editarAnuncio(){
+        let respuesta: LoginRespuesta = {};
+        let solucion: string;
+        const anuncio = {
+          "titulo": this.miFormulario.get("titulo")?.value,
+          "categoria": this.miFormulario.get("categoria")?.value,
+          "precio": this.miFormulario.get("precio")?.value,
+          "tipoPrecio": this.miFormulario.get("tipoPrecio")?.value,
+          "descripcion": this.miFormulario.get("descripcion")?.value,
+          "ubicacion": this.miFormulario.get("ubicacion")?.value,
+          "id":this.miFormulario.get("id")?.value
+
+          
+          
   
-  listaCategorias:Categoria[]=[];
+      }
+      console.log(this.miFormulario);
+      this.anuncioService.editAnuncio(anuncio).subscribe({
+          
+        next:resp => {
+          respuesta = resp;
+          // console.log(repuesta.jwt_token)
+          
+          //  localStorage.setItem('jwt', respuesta.jwt_token);
+          //  this.router.navigate(['profile/misCurritos']);
+           Swal.fire({
+            title: 'Error al editar anuncio',
+            text: 'Vuelve a intentarlo',
+            icon: 'warning',
+            confirmButtonText: 'Ok'
+          })
+          window.location.reload();
+          //  solucion = "true";
+         
+       },
+       error(error){
+         solucion = "error";
+        //  localStorage.removeItem('jwt');
+         Swal.fire({
+           title: 'Error al editar anuncio',
+           text: 'Vuelve a intentarlo',
+           icon: 'error',
+           confirmButtonText: 'Ok'
+         })
+       }
+  
+       
+       
+       
+     })
+      }
+
+      
+  
+      listaCategorias:Data={
+        data:[],
+        page:0,
+        limit:0
+      };
    /**
      * Metodo para mostrar la lista de categorias, la cual la recibe del servicio categoriaService
      */

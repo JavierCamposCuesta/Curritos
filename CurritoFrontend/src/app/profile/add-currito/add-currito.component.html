@@ -1,13 +1,12 @@
-<div class="w-100 d-flex row">
-    <app-sidebar></app-sidebar>
+<!-- <div class="w-100 d-flex row">
  
-  <div class="col-8 w-75" style="margin-left: 20%;">
-    <h2 class="pt-5 mb-0 mb-3 ms-5">Nuevo Currito</h2>
+  <div class="col-8 w-75" style="margin-left: 20%;"> -->
+    <h2 class="pt-5 mb-0 mb-3 ms-5">{{this.titulo}}</h2>
     <section class="vh-75">
-        <div class="container py-1 h-75">
+        <div class="container h-75">
           <div class="row d-flex justify-content-center align-items-center h-75">
-            <div class="col-12 col-md-8 col-lg-6 col-xl-5 w-75">
-              <div class="card shadow-2-strong border-3" style="border-radius: 1rem;">
+            <div class="col-12 col-sm-12 col-md-10 col-lg-6 col-xl-5 w-100">
+              <div class="card shadow-2-strong border-3 w-100" style="border-radius: 1rem;">
                 <div class="card-body p-5 text-center">
       
                   
@@ -29,7 +28,7 @@
                     <label for="inputEmail4" class="form-label ms-2">Categoría</label>
                     <select class="form-select" formControlName="categoria" name="select" >
                       
-                      <option *ngFor="let item of listaCategorias" [value]="item.nombre" >{{item.nombre}}</option>
+                      <option *ngFor="let item of listaCategorias.data" [value]="item.nombre" >{{item.nombre}}</option>
                         <!-- <option value="2">Jardinería</option> -->
                     </select>
                   </div>
@@ -117,7 +116,7 @@
                       
                   </div>
       
-                  <button class="btn btn-primary btn-lg btn-block w-50 ms-auto me-auto" type="submit" >Subir anuncio</button>
+                  <button class="btn btn-primary btn-lg btn-block w-50 ms-auto me-auto" type="submit" >{{botonRegistro}}</button>
                      
                 </form>
                 
@@ -134,5 +133,5 @@
       
       
       
-      </div>
-    </div>
+      <!-- </div>
+    </div> -->
