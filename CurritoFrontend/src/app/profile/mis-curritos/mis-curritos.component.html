@@ -16,30 +16,23 @@
       <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
         <!-- Data table para mayores de lg -->
         <p-table #dt2 [value]="listaMisAnuncios" responsiveLayout="stack" breakpoint="750px" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" 
-        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[5,10,20]">        
-        <!-- <ng-template pTemplate="caption">
-          <div class="p-d-flex">
-            <span class="p-input-icon-left p-ml-auto">
-                      <i class="pi pi-search"></i>
-                      <input pInputText type="text" (input)="dt2.filterGlobal($event.target.value, 'contains')" placeholder="Search keyword" />
-                  </span>
-          </div>
-        </ng-template> -->
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[5,10,20]" [globalFilterFields]="['listaCategorias.nombre']">        
+        
+        
           <ng-template pTemplate="header" let-columns>
               <tr>
                   <th></th>
                   <th pSortableColumn="titulo">Título <p-sortIcon field="titulo"></p-sortIcon></th>
                   <th pSortableColumn="categoria">Categoría <p-sortIcon field="categoria"></p-sortIcon></th>
-                  <!-- <p-columnFilter field="status" matchMode="equals" [showMenu]="false">
+                  <!-- <p-columnFilter field="listaCategorias.nombre" matchMode="equals" [showMenu]="false">
                     <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-                      <p-dropdown [ngModel]="value" [options]="listaCategorias" (onChange)="filter($event.value)"
-                        placeholder="Any" [showClear]="true">
-                        <ng-template let-anuncio pTemplate="item">
-                          <span [class]="'customer-badge status-' + anuncio">{{anuncio.categoria}}</span>
-                        </ng-template>
-                      </p-dropdown>
+                        <p-dropdown [ngModel]="value" [options]="statuses" (onChange)="filter($event.value)" placeholder="Any" [showClear]="true">
+                            <ng-template let-option pTemplate="item">
+                                <span [class]="'customer-badge categoria-' + option">{{option.nombre}}</span>
+                            </ng-template>
+                        </p-dropdown>
                     </ng-template>
-                  </p-columnFilter> -->
+                </p-columnFilter> -->
                   <th pSortableColumn="precio">Precio <p-sortIcon field="precio"></p-sortIcon></th>
                   <th pSortableColumn="fechaAnuncio">Fecha <p-sortIcon field="fechaAnuncio"></p-sortIcon></th>
                   <th>Editar</th>
@@ -51,6 +44,9 @@
               <tr>
                 <td><img src="https://www.hola.com/imagenes/decoracion/20210513189473/plantas-sustituir-cesped-jardin-mc/0-951-526/alternativas-cesped-1-a.jpg" alt="Imagen" width="50" class="shadow-4" /></td>
                   <td  style="max-width: 50px; text-overflow: ellipsis; overflow: hidden;" ><span class="p-column-title" pSortableColumn="titulo"><strong>Título</strong></span>{{anuncio.titulo}}</td>
+                  <!-- <td>
+                    <span [class]="'customer-badge status-' + anuncio.categoria">{{anuncio.categoria}}</span>
+                  </td> -->
                   <td><span class="p-column-title" pSortableColumn="categoria"><strong>Categoría</strong></span>{{anuncio.categoria}}</td>
                   <td><span class="p-column-title" pSortableColumn="precio"><strong>Precio</strong></span>{{anuncio.precio}} €</td>
                   <td><span class="p-column-title" pSortableColumn="fechaAnuncio"><strong>Fecha</strong></span>{{anuncio.fechaAnuncio}}</td>
@@ -64,12 +60,7 @@
                   </td>
               </tr>
           </ng-template>
-          <ng-template pTemplate="paginatorleft">
-            <p-button type="button" icon="pi pi-plus" styleClass="p-button-text"></p-button>
-        </ng-template>
-        <ng-template pTemplate="paginatorright">
-            <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text"></p-button>
-        </ng-template>
+          
         </p-table>
       </div>
 

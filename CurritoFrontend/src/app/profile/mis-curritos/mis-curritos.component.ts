@@ -22,6 +22,7 @@ export class MisCurritosComponent implements OnInit {
   ngOnInit(): void {
     this.misAnuncios();
     this.primengConfig.ripple = true;
+    this.cargarCategorias();
     
   }
 
@@ -31,11 +32,7 @@ export class MisCurritosComponent implements OnInit {
   first = 0;
 
   rows = 10;
-  listaCategorias:Data={
-    data:[],
-    page:0,
-    limit:0
-  };
+  listaCategorias:Categoria[]=[];
 
   cargarCategorias(){
     this.categoriaService.mostrarCategorias().subscribe(resp =>{
