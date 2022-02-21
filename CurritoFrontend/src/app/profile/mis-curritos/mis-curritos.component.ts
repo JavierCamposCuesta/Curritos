@@ -27,6 +27,7 @@ export class MisCurritosComponent implements OnInit {
   }
 
   listaMisAnuncios:Anuncio[]=[];
+  listaMisAnunciosTerminados:Anuncio[]=[];
   anuncioSeleccionado:Anuncio={};
   dialogoVisible:boolean = false;
   first = 0;
@@ -50,6 +51,25 @@ export class MisCurritosComponent implements OnInit {
     })
   }
 
+   /**
+   * Este método resuelve la peticion de anuncioService, la cual dará una lista de anuncios que cargamos en la variable listaMisAnuncios
+   */
+    misAnunciosTerminados(){
+      this.anuncioService.misAnunciosTerminados().subscribe({
+          
+        next:resp => {
+          this.listaMisAnunciosTerminados=resp;
+       },
+       error(error){
+        
+       }
+  
+       
+       
+       
+     })
+    }
+
   /**
    * Este método se lanza cuando se pulsa el boton de editar un anuncio
    * @param anuncio 
@@ -72,7 +92,7 @@ export class MisCurritosComponent implements OnInit {
  * @param idAnuncio 
  */
  borrarAnuncio(idAnuncio:number){
-  let solucion:boolean = true;
+  
    this.anuncioService.borrarAnuncio(idAnuncio).subscribe(
     resp => {
        this.showSuccess()
@@ -84,6 +104,23 @@ export class MisCurritosComponent implements OnInit {
       })
       // window.location.reload();
   
+}
+
+finalizarAnuncio(idAnuncio: number){
+  this.anuncioService.finalizarAnuncio(idAnuncio).subscribe({
+          
+    next:resp => {
+      this.misAnuncios();
+      console.log("Todo correcto")
+   },
+   error(error){
+    
+   }
+
+   
+   
+   
+ })
 }
 
 /**

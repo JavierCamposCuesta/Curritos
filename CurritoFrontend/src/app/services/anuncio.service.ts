@@ -28,6 +28,18 @@ export class AnuncioService {
   }
 
   /**
+   * Método para pedir todas las categorias
+   * @returns lista con todas las categorias
+   */
+   misAnunciosTerminados(){
+    const url = `${this.baseUrl}/profile/mis-anuncios-terminados`;
+
+    const headers = this.headers;
+      return this.http.get<Anuncio[]>(url, {headers});
+    
+  }
+
+  /**
    * Método para registrar usuarios, recibe un usuario y lanza la peticion a la API
    * @param user 
    * @returns Un observable con el resultado de la petición
@@ -56,6 +68,13 @@ export class AnuncioService {
     const headers = new HttpHeaders()
       .set('Authorization', `Bearer ${localStorage.getItem('jwt')}` || '' );
       return this.http.delete(url, {headers});
+  }
+
+  finalizarAnuncio(idAnuncio: number){
+    const url = `${this.baseUrl}/anuncio/${idAnuncio}/finalizar-anuncio`;
+    const headers = new HttpHeaders()
+      .set('Authorization', `Bearer ${localStorage.getItem('jwt')}` || '' );
+      return this.http.get(url, {headers});
   }
 
 
