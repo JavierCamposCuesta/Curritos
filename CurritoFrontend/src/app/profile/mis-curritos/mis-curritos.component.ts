@@ -1,8 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AnuncioService } from 'src/app/services/anuncio.service';
-import { Anuncio } from '../../interfaces/interface';
+import { Anuncio, Categoria } from '../../interfaces/interface';
 import {MessageService} from 'primeng/api';
 import { PrimeNGConfig } from 'primeng/api';
+import { CategoriaService } from 'src/app/services/categoria.service';
+import { Data } from '@angular/router';
 @Component({
   selector: 'app-mis-curritos',
   templateUrl: './mis-curritos.component.html',
@@ -14,7 +16,8 @@ import { PrimeNGConfig } from 'primeng/api';
 export class MisCurritosComponent implements OnInit {
   constructor(private anuncioService: AnuncioService,
     private messageService: MessageService,
-    private primengConfig: PrimeNGConfig) { }
+    private primengConfig: PrimeNGConfig,
+    private categoriaService: CategoriaService) { }
   
   ngOnInit(): void {
     this.misAnuncios();
@@ -25,6 +28,20 @@ export class MisCurritosComponent implements OnInit {
   listaMisAnuncios:Anuncio[]=[];
   anuncioSeleccionado:Anuncio={};
   dialogoVisible:boolean = false;
+  first = 0;
+
+  rows = 10;
+  listaCategorias:Data={
+    data:[],
+    page:0,
+    limit:0
+  };
+
+  cargarCategorias(){
+    this.categoriaService.mostrarCategorias().subscribe(resp =>{
+      this.listaCategorias = resp.data;
+    })
+  }
   
 
   /**

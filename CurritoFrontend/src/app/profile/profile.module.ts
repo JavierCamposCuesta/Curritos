@@ -18,6 +18,7 @@ import {DialogModule} from 'primeng/dialog';
 import { ProfileComponent } from './profile.component';
 import {ToastModule} from 'primeng/toast';
 import { MessageService } from 'primeng/api';
+import {ButtonModule} from 'primeng/button';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { MessageService } from 'primeng/api';
     PaginatorModule,
     CardModule,
     DialogModule,
-    ToastModule
+    ToastModule,
+    ButtonModule
     
   ],
   exports: [
