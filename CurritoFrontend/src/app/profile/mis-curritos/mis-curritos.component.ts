@@ -21,6 +21,7 @@ export class MisCurritosComponent implements OnInit {
   
   ngOnInit(): void {
     this.misAnuncios();
+    this.misAnunciosTerminados();
     this.primengConfig.ripple = true;
     this.cargarCategorias();
     
@@ -48,11 +49,12 @@ export class MisCurritosComponent implements OnInit {
   misAnuncios(){
     this.anuncioService.misAnuncios().subscribe( resp => {
       this.listaMisAnuncios=resp;
+      console.log(this.listaMisAnuncios.length)
     })
   }
 
    /**
-   * Este método resuelve la peticion de anuncioService, la cual dará una lista de anuncios que cargamos en la variable listaMisAnuncios
+   * Este método resuelve la peticion de anuncioService, la cual dará una lista de anuncios terminados que cargamos en la variable listaMisAnunciosTerminados
    */
     misAnunciosTerminados(){
       this.anuncioService.misAnunciosTerminados().subscribe({
@@ -60,7 +62,7 @@ export class MisCurritosComponent implements OnInit {
         next:resp => {
           this.listaMisAnunciosTerminados=resp;
        },
-       error(error){
+       error:error =>{
         
        }
   
@@ -106,15 +108,22 @@ export class MisCurritosComponent implements OnInit {
   
 }
 
+/**
+ * Este metodo se llamará cuando se pulse el boton de finalizar anuncio, se llamará al servicio de anuncio y segun la respuesta se 
+ * mostrará el mensaje correspondiente
+ * @param idAnuncio 
+ */
 finalizarAnuncio(idAnuncio: number){
   this.anuncioService.finalizarAnuncio(idAnuncio).subscribe({
           
     next:resp => {
+      this.showSuccessFinalizarAnuncio()
       this.misAnuncios();
-      console.log("Todo correcto")
+      this.misAnunciosTerminados();
+      
    },
-   error(error){
-    
+   error: error =>{
+    this.showErrorFinalizarAnuncio();
    }
 
    
@@ -122,6 +131,8 @@ finalizarAnuncio(idAnuncio: number){
    
  })
 }
+
+//MENSAJES
 
 /**
  * Este método muestra el mensaje verde con el texto indicado si ha sido posible borrar un anuncio
@@ -131,12 +142,25 @@ finalizarAnuncio(idAnuncio: number){
 }
 
 /**
+ * Este método muestra el mensaje verde con el texto indicado si ha sido posible terminar un anuncio
+ */
+ showSuccessFinalizarAnuncio() {
+  this.messageService.add({severity:'success', summary: 'Guardado', detail: 'El anuncio se ha añadido a terminados'});
+}
+
+/**
  * Este método muestra el mensaje rojo con el texto indicado si no ha sido posible borrar un anuncio
  */
 showError() {
   this.messageService.add({severity:'error', summary: 'Error', detail: 'No se ha podido eliminar el anuncio'});
 }
 
+/**
+ * Este método muestra el mensaje rojo con el texto indicado si no ha sido posible terminar un anuncio
+ */
+ showErrorFinalizarAnuncio() {
+  this.messageService.add({severity:'error', summary: 'Error', detail: 'No se ha podido finalizar el anuncio'});
+}
 
 
 

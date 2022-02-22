@@ -50,5 +50,7 @@ export interface Anuncio {
     fechaAnuncio?: Date;
     fechaFin?:     null | Date;
     tipoPrecio?:   string;
+    autorAnuncio?: Usuario;
+    ubicacion?: string;
 }
 

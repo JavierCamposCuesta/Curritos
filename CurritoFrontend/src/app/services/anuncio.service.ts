@@ -77,6 +77,11 @@ export class AnuncioService {
       return this.http.get(url, {headers});
   }
 
+  cargarAnunciosRecientes(){
+      const url = `${this.baseUrl}/anuncios/anuncios-recientes`;
+      return this.http.get<Anuncio[]>(url);
+  }
+
 
 
 

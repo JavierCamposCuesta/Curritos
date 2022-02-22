@@ -78,7 +78,7 @@ constructor( private fb: FormBuilder,
   }
   campoNoValido( campo: string ) {
    
-    this.findInvalidControlsRecursive(this.miFormulario);
+    // this.findInvalidControlsRecursive(this.miFormulario);
     return this.miFormulario.get(campo)?.invalid
     && this.miFormulario.get(campo)?.touched;
   }
@@ -86,24 +86,24 @@ constructor( private fb: FormBuilder,
   /**
    * Metodo para ver donde falla el formulario
    */
-  public findInvalidControlsRecursive(formToInvestigate:FormGroup|FormArray):string[] {
-    var invalidControls:string[] = [];
-    let recursiveFunc = (form:FormGroup|FormArray) => {
-      Object.keys(form.controls).forEach(field => { 
-        const control = form.get(field);
-        if (control?.invalid) invalidControls.push(field);
-        if (control instanceof FormGroup) {
-          recursiveFunc(control);
-        } else if (control instanceof FormArray) {
-          recursiveFunc(control);
-        }        
-      });
-    }
-    recursiveFunc(formToInvestigate);
-    console.log(invalidControls)
-    console.log(this.miFormulario.valid + "gfgdfgdgdfgfdgfdgdfg")
-    return invalidControls;
-  }
+  // public findInvalidControlsRecursive(formToInvestigate:FormGroup|FormArray):string[] {
+  //   var invalidControls:string[] = [];
+  //   let recursiveFunc = (form:FormGroup|FormArray) => {
+  //     Object.keys(form.controls).forEach(field => { 
+  //       const control = form.get(field);
+  //       if (control?.invalid) invalidControls.push(field);
+  //       if (control instanceof FormGroup) {
+  //         recursiveFunc(control);
+  //       } else if (control instanceof FormArray) {
+  //         recursiveFunc(control);
+  //       }        
+  //     });
+  //   }
+  //   recursiveFunc(formToInvestigate);
+  //   console.log(invalidControls)
+  //   console.log(this.miFormulario.valid + "gfgdfgdgdfgfdgfdgdfg")
+  //   return invalidControls;
+  // }
   
   
     

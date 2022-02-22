@@ -71,19 +71,14 @@ export class ValidatorRegistroService implements AsyncValidator{
                   map( resp => {
                     if(resp != null && resp.length == undefined){
                                 respuesta = "valido";
-                                console.log("fdfsdf" +resp.length)
-                                console.log("en el 1")
                       
                                 control.get("email")?.setErrors({ emailTomado: true });
-                          console.log(control.get("email")?.getError("emailTomado"))
                           return { emailTomado: true }
                               }
                               else{
                       
                                 control.get("email")?.setErrors(null);
-                         console.log(control.get("email")?.getError("emailTomado"))
                          respuesta = "noValido";
-                         console.log("en el 2")
                          return null
                               }
                   })
