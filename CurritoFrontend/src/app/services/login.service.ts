@@ -25,8 +25,7 @@ private estado: boolean = false;
     
     }
   
-    console.log("aqui si")
-    console.log(this.http.post(url, body));
+    
     return this.http.post<LoginRespuesta>(url, body);
   }
 

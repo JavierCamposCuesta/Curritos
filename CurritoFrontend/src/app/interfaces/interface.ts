@@ -52,5 +52,6 @@ export interface Anuncio {
     tipoPrecio?:   string;
     autorAnuncio?: Usuario;
     ubicacion?: string;
+    comentario?: any;
 }
 

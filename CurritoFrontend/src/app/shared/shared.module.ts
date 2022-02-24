@@ -10,6 +10,7 @@ import { AppRoutingModule } from '../app-routing.module';
 import { RouterModule } from '@angular/router';
 import { UploadImageComponent } from './upload-image/upload-image.component';
 import { CardAnuncioComponent } from './card-anuncio/card-anuncio.component';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -25,7 +26,8 @@ import { CardAnuncioComponent } from './card-anuncio/card-anuncio.component';
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    FormsModule
   ],
   exports:[
     SidebarComponent,

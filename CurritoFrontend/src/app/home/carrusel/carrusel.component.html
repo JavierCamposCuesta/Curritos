@@ -1,5 +1,5 @@
 <div class="p-5 content-section implementation carousel-demo">
-    <div class="card" style="border: 0px">
+    <div class="card" style="border: 0px" >
       <p-carousel
         [value]="listaCategorias.data"
         styleClass="custom-carousel"
@@ -9,10 +9,11 @@
         [autoplayInterval]="2000"
         [responsiveOptions]="responsiveOptions"
         [showIndicators]="true"
-        style="background-color: rgba(226, 226, 226, 0.342)"
+        class="colorFondoCarrusel"
+        
       >
-        <ng-template let-categoria pTemplate="item">
-          <div class="item text-center">
+        <ng-template let-categoria pTemplate="item" >
+          <div class="item text-center" >
             <a
               href="#"
               class="text-decoration-none text-center navy"

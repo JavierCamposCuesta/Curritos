@@ -142,6 +142,7 @@ export class AddCurritoComponent implements OnInit {
           "tipoPrecio": this.miFormulario.get("tipoPrecio")?.value,
           "descripcion": this.miFormulario.get("descripcion")?.value,
           "ubicacion": this.miFormulario.get("ubicacion")?.value
+          
 
           
           

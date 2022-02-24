@@ -15,7 +15,7 @@
       <!-- Tabla para mostrar mis anuncios -->
       <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
         <!-- Data table para mayores de lg -->
-        <p-table #dt2 [value]="listaMisAnuncios" responsiveLayout="stack" breakpoint="750px" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" 
+        <p-table #dt2 [value]="listaMisAnuncios" responsiveLayout="stack" breakpoint="815px" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" 
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[5,10,20]" [globalFilterFields]="['listaCategorias.nombre']">        
         
         
@@ -43,7 +43,7 @@
           <ng-template pTemplate="body" let-anuncio let-columns="anuncio">
               <tr>
                 <td><img src="https://www.hola.com/imagenes/decoracion/20210513189473/plantas-sustituir-cesped-jardin-mc/0-951-526/alternativas-cesped-1-a.jpg" alt="Imagen" width="50" class="shadow-4" /></td>
-                  <td  style="max-width: 50px; text-overflow: ellipsis; overflow: hidden;" ><span class="p-column-title" pSortableColumn="titulo"><strong>Título</strong></span>{{anuncio.titulo}}</td>
+                  <td  class='textoConPuntos'><span class="p-column-title" pSortableColumn="titulo"><strong>Título</strong></span>{{anuncio.titulo}}</td>
                   <!-- <td>
                     <span [class]="'customer-badge status-' + anuncio.categoria">{{anuncio.categoria}}</span>
                   </td> -->

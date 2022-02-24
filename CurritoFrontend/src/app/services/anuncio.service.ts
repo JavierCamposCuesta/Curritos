@@ -14,6 +14,8 @@ export class AnuncioService {
 
 
   constructor(private http: HttpClient) {}
+  listaAnuncios:Anuncio[]=[];
+  termino:string='';
 
   /**
    * Método para pedir todas las categorias
@@ -82,6 +84,41 @@ export class AnuncioService {
       return this.http.get<Anuncio[]>(url);
   }
 
+  buscarAnuncio(termino: string){
+    const url = `${this.baseUrl}/anuncios/?termino=${termino}`;
+    return this.http.get<Anuncio[]>(url);
+  }
+
+  recogerTermino(termino: string){
+    this.termino = termino;
+  }
+
+  darTermino(){
+    return this.termino;
+  }
+
+  //  cargarBusquedaAnuncios(){
+  //    this.buscarAnuncio(this.termino).subscribe({
+          
+  //     next:resp => {
+  //       this.listaAnuncios = resp;
+  //       console.log("lista de cargar anuyncios"+ this.listaAnuncios.length)
+  //    },
+  //    error(error){
+  //    }
+  //  })
+  // }
+
+  darListaAnuncios(){
+    return this.listaAnuncios;
+  }
+
+
+
+
+
+
+  //######### BUSQUEDA DE ANUNCIOS
 
 
 

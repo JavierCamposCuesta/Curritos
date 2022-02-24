@@ -13,6 +13,7 @@ import { AuthGuard } from './services/auth-guard.service';
 import { RouterModule } from '@angular/router';
 import { ProfileModule } from './profile/profile.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { AnuncioModule } from './anuncio/anuncio.module';
 
 
 
@@ -31,7 +32,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     AuthModule,
     RouterModule,
     ProfileModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    AnuncioModule
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent]
