@@ -22,17 +22,17 @@ export class HeaderComponent implements OnInit {
   //   this.onEnter.emit(this.busqueda);
   // }
 
-  buscar(busqueda :string){
-    this.busqueda = busqueda;
-    this.anuncioService.recogerTermino(this.busqueda)
-    if(this.router.url === '/anuncio'){
-      location
-    }
-    else{
-      this.router.navigate(['anuncio']);
+  // buscar(busqueda :string){
+  //   this.busqueda = busqueda;
+  //   this.anuncioService.recogerTermino(this.busqueda)
+  //   if(this.router.url === '/anuncio'){
+  //     location
+  //   }
+  //   else{
+  //     this.router.navigate(['anuncio']);
 
-    }
+  //   }
 
-  }
+  // }
 
 }

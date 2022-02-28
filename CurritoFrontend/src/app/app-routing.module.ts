@@ -37,9 +37,13 @@ const routes: Routes = [
   path: 'anuncio',
   component: AnuncioComponent
 },
-  {
-    path: '**',
-    component: HomeComponent
+{
+  path: 'anuncio/:termino',
+  component: AnuncioComponent
+},
+{
+  path: '**',
+  component: HomeComponent
 },
 ];
 @NgModule({

@@ -43,13 +43,10 @@
           <ng-template pTemplate="body" let-anuncio let-columns="anuncio">
               <tr>
                 <td><img src="https://www.hola.com/imagenes/decoracion/20210513189473/plantas-sustituir-cesped-jardin-mc/0-951-526/alternativas-cesped-1-a.jpg" alt="Imagen" width="50" class="shadow-4" /></td>
-                  <td  class='textoConPuntos'><span class="p-column-title" pSortableColumn="titulo"><strong>Título</strong></span>{{anuncio.titulo}}</td>
-                  <!-- <td>
-                    <span [class]="'customer-badge status-' + anuncio.categoria">{{anuncio.categoria}}</span>
-                  </td> -->
+                  <td  class='textoConPuntos '><span class="p-column-title" pSortableColumn="titulo"><strong>Título</strong></span>{{anuncio.titulo}}</td>
                   <td><span class="p-column-title" pSortableColumn="categoria"><strong>Categoría</strong></span>{{anuncio.categoria}}</td>
                   <td><span class="p-column-title" pSortableColumn="precio"><strong>Precio</strong></span>{{anuncio.precio}} €</td>
-                  <td><span class="p-column-title" pSortableColumn="fechaAnuncio"><strong>Fecha</strong></span>{{anuncio.fechaAnuncio}}</td>
+                  <td style="overflow: hidden;"><span class="p-column-title" pSortableColumn="fechaAnuncio"><strong>Fecha</strong></span>{{anuncio.fechaAnuncio}}</td>
                   <td class="ocultarMenor680" (click)="seleccionarEventoEditar(anuncio)"><span class="p-column-title " >Editar</span><a class="btn"><i class="bi bi-pencil-fill focusEditar"></i></a></td>
                   <td class="ocultarMenor680" (click)="borrarAnuncio(anuncio.id)"><span class="p-column-title ">Borrar</span><a class="btn"><i class="bi bi-trash-fill focusBorrar"></i></a></td>
                   <td class="ocultarMenor680" (click)="finalizarAnuncio(anuncio.id)"><span class="p-column-title ">Finalizado</span><a class="btn"><i class="bi bi-check2-square focusFinalizado"></i></a></td>

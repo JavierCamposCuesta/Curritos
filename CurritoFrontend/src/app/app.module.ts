@@ -14,6 +14,8 @@ import { RouterModule } from '@angular/router';
 import { ProfileModule } from './profile/profile.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { AnuncioModule } from './anuncio/anuncio.module';
+import { NgEventBus } from 'ng-event-bus';  // https://www.npmjs.com/package/ng-event-bus
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -33,9 +35,11 @@ import { AnuncioModule } from './anuncio/anuncio.module';
     RouterModule,
     ProfileModule,
     BrowserAnimationsModule,
-    AnuncioModule
+    AnuncioModule,
+    FormsModule
   ],
-  providers: [AuthGuard],
+  providers: [AuthGuard,
+  NgEventBus],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -14,7 +14,7 @@
     font-size: calc(0.5em + 0.8vw);
 }
 
-.textoConPuntos {
+/* .textoConPuntos {
     display: block;
     display: -webkit-box;
     max-width: 100%;
@@ -40,4 +40,4 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
-  }
+  } */

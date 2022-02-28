@@ -14,8 +14,8 @@ export class AnuncioService {
 
 
   constructor(private http: HttpClient) {}
-  listaAnuncios:Anuncio[]=[];
-  termino:string='';
+  // listaAnuncios:Anuncio[]=[];
+  // termino:string='';
 
   /**
    * Método para pedir todas las categorias
@@ -48,8 +48,9 @@ export class AnuncioService {
    */
  addAnuncio(anuncio:Anuncio){
   const url = `${this.baseUrl}/anuncio`;
-  const headers = new HttpHeaders()
-    .set('Authorization', `Bearer ${localStorage.getItem('jwt')}` || '' );
+  // const headers = new HttpHeaders()
+  //   .set('Authorization', `Bearer ${localStorage.getItem('jwt')}` || '' );
+  const headers = this.headers;
     return this.http.post(url, anuncio, {headers});
 }
 
@@ -60,22 +61,25 @@ export class AnuncioService {
    */
   editAnuncio(anuncio:Anuncio){
     const url = `${this.baseUrl}/anuncio/${anuncio.id}`;
-    const headers = new HttpHeaders()
-      .set('Authorization', `Bearer ${localStorage.getItem('jwt')}` || '' );
+    // const headers = new HttpHeaders()
+    //   .set('Authorization', `Bearer ${localStorage.getItem('jwt')}` || '' );
+    const headers = this.headers;
       return this.http.put(url, anuncio, {headers});
   }
 
   borrarAnuncio(idAnuncio:number){
     const url = `${this.baseUrl}/anuncio/${idAnuncio}`;
-    const headers = new HttpHeaders()
-      .set('Authorization', `Bearer ${localStorage.getItem('jwt')}` || '' );
+    // const headers = new HttpHeaders()
+    //   .set('Authorization', `Bearer ${localStorage.getItem('jwt')}` || '' );
+    const headers = this.headers;
       return this.http.delete(url, {headers});
   }
 
   finalizarAnuncio(idAnuncio: number){
     const url = `${this.baseUrl}/anuncio/${idAnuncio}/finalizar-anuncio`;
-    const headers = new HttpHeaders()
-      .set('Authorization', `Bearer ${localStorage.getItem('jwt')}` || '' );
+    // const headers = new HttpHeaders()
+    //   .set('Authorization', `Bearer ${localStorage.getItem('jwt')}` || '' );
+    const headers = this.headers;
       return this.http.get(url, {headers});
   }
 
@@ -84,34 +88,40 @@ export class AnuncioService {
       return this.http.get<Anuncio[]>(url);
   }
 
-  buscarAnuncio(termino: string){
-    const url = `${this.baseUrl}/anuncios/?termino=${termino}`;
+  buscarAnuncio(termino: string, categoria:string, rangoPrecio:number[], orden:string){
+    const url = `${this.baseUrl}/anuncios/?termino=${termino}&categoria=${categoria}&rangoPrecio=${rangoPrecio}&orden=${orden}`;
     return this.http.get<Anuncio[]>(url);
   }
 
-  recogerTermino(termino: string){
-    this.termino = termino;
+  addFavorito(anuncio: Anuncio){
+    console.log("llega has aqui")
+    const url = `${this.baseUrl}/favoritos`;
+    const headers = this.headers;
+      return this.http.post(url, anuncio, {headers});
   }
 
-  darTermino(){
-    return this.termino;
+  borrarFavorito(anuncio: Anuncio){
+    console.log("llega has aqui")
+    const url = `${this.baseUrl}/favoritos/${anuncio.id}`;
+    const headers = this.headers;
+      return this.http.delete(url, {headers});
   }
 
-  //  cargarBusquedaAnuncios(){
-  //    this.buscarAnuncio(this.termino).subscribe({
-          
-  //     next:resp => {
-  //       this.listaAnuncios = resp;
-  //       console.log("lista de cargar anuyncios"+ this.listaAnuncios.length)
-  //    },
-  //    error(error){
-  //    }
-  //  })
+  cargarFavoritos(){
+    const url = `${this.baseUrl}/favoritos`;
+    const headers = this.headers;
+      return this.http.get<Anuncio[]>(url, {headers});
+  }
+
+  // recogerTermino(termino: string){
+  //   this.termino = termino;
   // }
 
-  darListaAnuncios(){
-    return this.listaAnuncios;
-  }
+  
+
+  // darListaAnuncios(){
+  //   return this.listaAnuncios;
+  // }
 
 
 

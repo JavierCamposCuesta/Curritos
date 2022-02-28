@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {MenuItem, PrimeIcons} from 'primeng/api';
-
+import { NgEventBus } from 'ng-event-bus';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -10,7 +10,7 @@ export class AppComponent implements OnInit {
   images: any; 
   responsiveOptions;
 
-  constructor() {
+  constructor(private eventBus: NgEventBus) {
       this.responsiveOptions = [
         {
             breakpoint: '1024px',
