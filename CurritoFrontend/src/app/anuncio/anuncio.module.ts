@@ -12,11 +12,16 @@ import {SliderModule} from 'primeng/slider';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {SelectButtonModule} from 'primeng/selectbutton';
 import {ButtonModule} from 'primeng/button';
+import { AnuncioDetalleComponent } from './anuncio-detalle/anuncio-detalle.component';
+
+
+
 
 @NgModule({
   declarations: [
     CardAnuncioComponent,
-    AnuncioComponent
+    AnuncioComponent,
+    AnuncioDetalleComponent
   ],
   imports: [
     CommonModule,
@@ -26,7 +31,8 @@ import {ButtonModule} from 'primeng/button';
     SliderModule,
     BrowserAnimationsModule,
     SelectButtonModule,
-    ButtonModule
+    ButtonModule,
+
   ],
   exports: [
     AnuncioComponent

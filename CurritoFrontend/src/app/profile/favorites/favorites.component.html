@@ -7,8 +7,7 @@
 
     <!-- Esta es la estructura que hay que repetir -->
     <div *ngIf="this.anunciosFavoritos.length == 0" class="w-100 text-center navy">
-      <p>Upsss...No hay coincidencias con tu búsqueda, quizá Dori pueda ayudarte</p>
-      <img src="http://cd1.eju.tv/wp-content/uploads/2016/08/57a2edac26e66.gif" alt="no hay resultados">
+      <p>Aún no has añadido ningún anuncio a favoritos</p>
     </div>
 
     <div class="col" style="height: 370px;" *ngFor="let anuncio of this.anunciosFavoritos" #elseBlock>

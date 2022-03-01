@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AnuncioDetalleComponent } from './anuncio/anuncio-detalle/anuncio-detalle.component';
 import { AnuncioComponent } from './anuncio/anuncio.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
@@ -40,6 +41,10 @@ const routes: Routes = [
 {
   path: 'anuncio/:termino',
   component: AnuncioComponent
+},
+{
+  path: 'anuncio-detalle',
+  component: AnuncioDetalleComponent
 },
 {
   path: '**',
