@@ -6,6 +6,7 @@ import { FavoritesComponent } from './favorites/favorites.component';
 import { MiPerfilComponent } from './mi-perfil/mi-perfil.component';
 import { MisCurritosComponent } from './mis-curritos/mis-curritos.component';
 import { PublicProfileComponent } from './public-profile/public-profile.component';
+import { SolicitadosComponent } from './solicitados/solicitados.component';
 
 
 
@@ -15,6 +16,7 @@ const routes: Routes = [
     { path: 'favorites',canActivate:[AuthGuard], component: FavoritesComponent },
     { path: 'addCurrito',canActivate:[AuthGuard], component: AddCurritoComponent },
     { path: 'misCurritos',canActivate:[AuthGuard], component: MisCurritosComponent },
+    { path: 'curritos-solicitados',canActivate:[AuthGuard], component: SolicitadosComponent },
     { path: 'my-profile',canActivate:[AuthGuard], component: MiPerfilComponent },
     { path: 'public-profile',canActivate:[AuthGuard], component: PublicProfileComponent },
     { path: '**', redirectTo: 'favorites' }

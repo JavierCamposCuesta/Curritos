@@ -47,6 +47,18 @@
     font-size: calc(0.5em + 0.8vw);
 }
 
+.cardAnuncio:hover{
+  cursor: pointer;
+}
+
+
+.corazonFavorito{
+  color:red; font-size: 1.7em; z-index: 1;
+}
+.corazonFavorito:hover{
+ font-size: 2em;
+}
+
   
   
 

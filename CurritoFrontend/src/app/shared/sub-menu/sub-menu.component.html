@@ -43,10 +43,14 @@
                 <i class="bi bi-person-circle" style="font-size: 1.5em"></i>
                 <h6 class="p-2">Perfil</h6>
             </a>
-            <a href="#" class="p-2 text-decoration-none d-flex navy">
+            <a [routerLink]="['profile/misCurritos']" class="p-2 text-decoration-none d-flex navy">
                 <i class="bi bi-emoji-sunglasses" style="font-size: 1.5em"></i>
                 <h6 class="p-2">Mis Currito's</h6>
             </a>
+            <a [routerLink]="['profile/curritos-solicitados']" class="p-2 text-decoration-none d-flex navy">
+              <i class="bi bi-sunglasses" style="font-size: 1.5em"></i>
+              <h6 class="p-2">Currito's solicitados</h6>
+          </a>
             <a href="#" class="p-2 text-decoration-none d-flex navy">
                 <i class="bi bi-star-half" style="font-size: 1.5em"></i>
                 <h6 class="p-2">Opiniones</h6>

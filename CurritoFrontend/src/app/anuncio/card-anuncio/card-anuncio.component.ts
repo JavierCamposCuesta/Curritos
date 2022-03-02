@@ -103,16 +103,18 @@ filtrarPorOrden(tipoOrden: string){
   this.sacarParametroRuta(this.categoria, this.rangoPrecio, this.tipoOrden);
 }
 
+
+//Metodos para añadir a favoritos
 addFavoritos(anuncio:Anuncio, evento:any) {
  
-  console.log(evento.target)
+  
   
    this.loginService.validarToken().subscribe({
          
     next:resp => {
 
       if(evento.target.classList.contains("bi-heart-fill")){
-        console.log("clase correcta")
+        
         this.borrarFavorito(anuncio,evento)
       }
       else{
@@ -133,7 +135,6 @@ addFavoritosEstaLogueado(anuncio: Anuncio, evento:any){
     next:resp => {
       evento.target.classList.remove('bi-heart')
       evento.target.classList.add("bi-heart-fill")
-      console.log("Añadido correctamente")
    },
    error: error =>{
     
@@ -155,6 +156,7 @@ borrarFavorito(anuncio: Anuncio, evento:any){
    }
   })
 }
+
 
  
   

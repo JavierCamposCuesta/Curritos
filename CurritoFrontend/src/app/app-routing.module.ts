@@ -47,6 +47,10 @@ const routes: Routes = [
   component: AnuncioDetalleComponent
 },
 {
+  path: 'anuncio-detalle/:id',
+  component: AnuncioDetalleComponent
+},
+{
   path: '**',
   component: HomeComponent
 },

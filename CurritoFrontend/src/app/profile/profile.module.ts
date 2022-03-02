@@ -21,6 +21,7 @@ import { MessageService } from 'primeng/api';
 import {ButtonModule} from 'primeng/button';
 import { MiPerfilComponent } from './mi-perfil/mi-perfil.component';
 import { PublicProfileComponent } from './public-profile/public-profile.component';
+import { SolicitadosComponent } from './solicitados/solicitados.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { PublicProfileComponent } from './public-profile/public-profile.componen
     OpinionsComponent,
     AddCurritoComponent,
     MiPerfilComponent,
-    PublicProfileComponent
+    PublicProfileComponent,
+    SolicitadosComponent
   ],
   imports: [
     CommonModule,

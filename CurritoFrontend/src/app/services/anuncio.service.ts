@@ -11,6 +11,8 @@ export class AnuncioService {
 
    private headers = new HttpHeaders()
       .set('Authorization', `Bearer ${localStorage.getItem('jwt')}` || '' );
+    
+
 
 
   constructor(private http: HttpClient) {}
@@ -35,6 +37,30 @@ export class AnuncioService {
    */
    misAnunciosTerminados(){
     const url = `${this.baseUrl}/profile/mis-anuncios-terminados`;
+
+    const headers = this.headers;
+      return this.http.get<Anuncio[]>(url, {headers});
+    
+  }
+
+   /**
+   * Método para pedir todas las categorias
+   * @returns lista con todas las categorias
+   */
+    misAnunciosSolicitados(){
+      const url = `${this.baseUrl}/profile/mis-anuncios-solicitados`;
+  
+      const headers = this.headers;
+        return this.http.get<Anuncio[]>(url, {headers});
+      
+    }
+
+     /**
+   * Método para pedir todas las categorias
+   * @returns lista con todas las categorias
+   */
+   misAnunciosRealizados(){
+    const url = `${this.baseUrl}/profile/mis-anuncios-realizados`;
 
     const headers = this.headers;
       return this.http.get<Anuncio[]>(url, {headers});
@@ -125,6 +151,17 @@ export class AnuncioService {
 
 
 
+mostrarAnuncioDetalle(id: any){
+  
+  const url = `${this.baseUrl}/anuncio/${id}`;
+  return this.http.get<Anuncio>(url);
+}
+
+solicitarCurrito(anuncio: Anuncio){
+  const url = `${this.baseUrl}/anuncios-solicitados`;
+  const headers = this.headers;
+  return this.http.post(url, anuncio, {headers});
+}
 
 
 

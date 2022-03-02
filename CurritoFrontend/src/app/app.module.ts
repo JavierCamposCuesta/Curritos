@@ -10,12 +10,13 @@ import { HomeModule } from './home/home.module';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthModule } from './auth/auth.module';
 import { AuthGuard } from './services/auth-guard.service';
-import { RouterModule } from '@angular/router';
+import { RouterLink, RouterModule } from '@angular/router';
 import { ProfileModule } from './profile/profile.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { AnuncioModule } from './anuncio/anuncio.module';
 import { NgEventBus } from 'ng-event-bus';  // https://www.npmjs.com/package/ng-event-bus
 import { FormsModule } from '@angular/forms';
+import {DialogModule} from 'primeng/dialog';
 
 
 
@@ -37,7 +38,8 @@ import { FormsModule } from '@angular/forms';
     ProfileModule,
     BrowserAnimationsModule,
     AnuncioModule,
-    FormsModule
+    FormsModule,
+    AppRoutingModule,
   ],
   providers: [AuthGuard,
   NgEventBus],
