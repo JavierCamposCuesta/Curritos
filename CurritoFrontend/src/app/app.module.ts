@@ -17,6 +17,7 @@ import { AnuncioModule } from './anuncio/anuncio.module';
 import { NgEventBus } from 'ng-event-bus';  // https://www.npmjs.com/package/ng-event-bus
 import { FormsModule } from '@angular/forms';
 import {DialogModule} from 'primeng/dialog';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 
 
@@ -40,6 +41,7 @@ import {DialogModule} from 'primeng/dialog';
     AnuncioModule,
     FormsModule,
     AppRoutingModule,
+    ConfirmDialogModule
   ],
   providers: [AuthGuard,
   NgEventBus],

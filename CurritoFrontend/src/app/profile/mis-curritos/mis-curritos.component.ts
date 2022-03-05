@@ -4,7 +4,8 @@ import { Anuncio, Categoria } from '../../interfaces/interface';
 import {MessageService} from 'primeng/api';
 import { PrimeNGConfig } from 'primeng/api';
 import { CategoriaService } from 'src/app/services/categoria.service';
-import { Data } from '@angular/router';
+
+
 @Component({
   selector: 'app-mis-curritos',
   templateUrl: './mis-curritos.component.html',
@@ -17,7 +18,7 @@ export class MisCurritosComponent implements OnInit {
   constructor(private anuncioService: AnuncioService,
     private messageService: MessageService,
     private primengConfig: PrimeNGConfig,
-    private categoriaService: CategoriaService) { }
+    private categoriaService: CategoriaService,) { }
   
   ngOnInit(): void {
     this.misAnuncios();
@@ -124,13 +125,18 @@ finalizarAnuncio(idAnuncio: number){
    },
    error: error =>{
     this.showErrorFinalizarAnuncio();
-   }
-
-   
-   
-   
+   } 
  })
 }
+
+// elegirSolicitante(idAnuncio: Anuncio) {
+//   this.confirmationService.confirm({
+//       message: 'Are you sure that you want to perform this action?',
+//       accept: () => {
+//           //Actual logic to perform a confirmation
+//       }
+//   });
+// }
 
 //MENSAJES
 

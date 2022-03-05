@@ -101,10 +101,9 @@ export class AnuncioService {
       return this.http.delete(url, {headers});
   }
 
+  //Finalizar anuncio
   finalizarAnuncio(idAnuncio: number){
     const url = `${this.baseUrl}/anuncio/${idAnuncio}/finalizar-anuncio`;
-    // const headers = new HttpHeaders()
-    //   .set('Authorization', `Bearer ${localStorage.getItem('jwt')}` || '' );
     const headers = this.headers;
       return this.http.get(url, {headers});
   }

@@ -24,6 +24,8 @@ import { PublicProfileComponent } from './public-profile/public-profile.componen
 import { SolicitadosComponent } from './solicitados/solicitados.component';
 
 
+
+
 @NgModule({
   declarations: [
     ProfileComponent,

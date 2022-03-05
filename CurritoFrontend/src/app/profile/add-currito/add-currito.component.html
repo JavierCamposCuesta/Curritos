@@ -28,7 +28,7 @@
                     <label for="inputEmail4" class="form-label ms-2">Categoría</label>
                     <select class="form-select" formControlName="categoria" name="select" >
                       
-                      <option *ngFor="let item of listaCategorias.data" [value]="item.nombre" >{{item.nombre}}</option>
+                      <option  *ngFor="let item of listaCategorias.data; let indice=index" [value]="item.nombre" [defaultSelected]="item.nombre=='Hogar'">{{item.nombre}}</option>
                         <!-- <option value="2">Jardinería</option> -->
                     </select>
                   </div>
