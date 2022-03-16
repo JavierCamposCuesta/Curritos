@@ -23,6 +23,9 @@ export class SolicitadosComponent implements OnInit {
   rows = 10;
 
 
+  /**
+   * Metodo para cargar los anuncios solicitados
+   */
   misAnunciosSolicitados(){
     this.anuncioService.misAnunciosSolicitados().subscribe( resp => {
       this.listaMisAnunciosSolicitados=resp;
@@ -30,6 +33,9 @@ export class SolicitadosComponent implements OnInit {
     })
   }
 
+  /**
+   * Metodo para cargar los anuncios realizados
+   */
   misAnunciosRealizados(){
     this.anuncioService.misAnunciosRealizados().subscribe( resp => {
       this.listaMisAnunciosRealizados=resp;

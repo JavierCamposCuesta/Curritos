@@ -31,13 +31,15 @@ export class CardAnuncioComponent implements OnInit {
       
     }
     
-    paymentOptions: any[];
-    value2: number=0;
+  paymentOptions: any[];
+
+  value2: number=0;
   listaAnuncios:Anuncio[]=[];
+
+  //Variables filtrado
   listaCategorias:any[]=[];
   rangoPrecio:number[] = [0,5000];
   categoria:string='Todas las categorias';
-  
   tipoOrden: string= "Novedades";
 
  
@@ -104,7 +106,12 @@ filtrarPorOrden(tipoOrden: string){
 }
 
 
-//Metodos para añadir a favoritos
+/**
+ * Metodo para añadir un anuncio a favorito, lo hace comprobando la clase del icono de favoritos, primero comprueba si el usuario
+ * esta logueado, en caso de no estarlo lo redirige al login
+ * @param anuncio 
+ * @param evento 
+ */
 addFavoritos(anuncio:Anuncio, evento:any) {
  
   
@@ -130,6 +137,11 @@ addFavoritos(anuncio:Anuncio, evento:any) {
  })
 }
 
+/**
+ * Metodo para añadir el anuncio a favoritos, visualmente cambia las clases del icono de favoritos
+ * @param anuncio 
+ * @param evento 
+ */
 addFavoritosEstaLogueado(anuncio: Anuncio, evento:any){
   this.anuncioService.addFavorito(anuncio).subscribe({
     next:resp => {
@@ -138,20 +150,30 @@ addFavoritosEstaLogueado(anuncio: Anuncio, evento:any){
    },
    error: error =>{
     
+    evento.target.classList.remove('bi-heart')
+      evento.target.classList.add("bi-heart-fill")
+    
    }
   })
   
 }
 
+/**
+ * Metodo para borrar el anuncio de favoritos, visualmente cambia las clases del icono de favoritos
+ * @param anuncio 
+ * @param evento 
+ */
 borrarFavorito(anuncio: Anuncio, evento:any){
   this.anuncioService.borrarFavorito(anuncio).subscribe({
     next:resp => {
       evento.target.classList.add('bi-heart')
         evento.target.classList.remove("bi-heart-fill")
-      console.log("borrado correctamente")
+      
    },
    error: error =>{
-    
+     
+    evento.target.classList.remove('bi-heart')
+      evento.target.classList.add("bi-heart-fill")
     
    }
   })

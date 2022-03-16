@@ -31,19 +31,6 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-      // this.images = [
-      //     {random: 'Random', picture: 'https://picsum.photos/id/944/900/500'},
-      //     {random: 'Samoa', picture: 'https://picsum.photos/id/1011/900/500'},
-      //     {random: 'Tonga', picture: 'https://picsum.photos/id/984/900/500'},
-      //     {random: 'Cook Island', picture: 'https://picsum.photos/id/944/900/500'},
-      //     {random: 'Niue', picture: 'https://picsum.photos/id/1011/900/500'},
-      //     {random: 'American Samoa', picture: 'https://picsum.photos/id/984/900/500'},
-      //     {random: 'Random', picture: 'https://picsum.photos/id/944/900/500'},
-      //     {random: 'Samoa', picture: 'https://picsum.photos/id/1011/900/500'},
-      //     {random: 'Tonga', picture: 'https://picsum.photos/id/984/900/500'},
-      //     {random: 'Cook Island', picture: 'https://picsum.photos/id/944/900/500'},
-      //     {random: 'Niue', picture: 'https://picsum.photos/id/1011/900/500'},
-      //     {random: 'American Samoa', picture: 'https://picsum.photos/id/984/900/500'}
-      // ];
+
   }
 }

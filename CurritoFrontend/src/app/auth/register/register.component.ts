@@ -3,7 +3,6 @@ import { FormArray, Validators } from '@angular/forms';
 import { FormBuilder, FormGroup} from '@angular/forms';
 import { ValidatorRegistroService } from 'src/app/services/validatorRegistro.service';
 import { LoginRespuesta } from 'src/app/interfaces/interface';
-import { environment } from '../../../environments/environment';
 import Swal from 'sweetalert2';
 import { HttpClient } from '@angular/common/http';
 import { RegisterService } from 'src/app/services/register.service';
@@ -28,17 +27,18 @@ export class RegisterComponent implements OnInit {
 },
 {
   validators: [this.ValidatorRegistroService.camposIguales('password', 'password2')
-  // , this.validatorService.validarEmail('email')
+  
 ],
 }
 );
 
 solucion: string = "";
-private baseUrl: string = environment.baseUrl; 
 
 
 
-
+/**
+ * metodo que construye los distintos mensajes de error segun el error que sea
+ */
 get emailErrorMsg(): string {
   
   const errors = this.miFormulario.get('email')?.errors!;
@@ -76,8 +76,15 @@ constructor( private fb: FormBuilder,
       nacimietno: ''
     })
   }
+  
+
+  /**
+   * Metodo que muestra el mensaje de error corespondiente
+   * @param campo 
+   * @returns Mensaje correspondiente
+   */
   campoNoValido( campo: string ) {
-   
+    
     // this.findInvalidControlsRecursive(this.miFormulario);
     return this.miFormulario.get(campo)?.invalid
     && this.miFormulario.get(campo)?.touched;
@@ -104,33 +111,34 @@ constructor( private fb: FormBuilder,
   //   console.log(this.miFormulario.valid + "gfgdfgdgdfgfdgfdgdfg")
   //   return invalidControls;
   // }
+
   
   
+  
     
     
     
-     
+    /**
+     * Metodo para subir el forumario
+     */
     submitFormulario() {
-    
-      this.register()
-     
-    
       this.miFormulario.markAllAsTouched();
-    
-    }
-
-    comprobarRespuestaLogin(){
-      if(this.solucion == "true"){
-
-      }
-      else if(this.solucion == "incorrect"){
+      if(this.miFormulario.valid){
+        this.register()
 
       }
       else{
-
+        Swal.fire({
+          title: 'El registro no es válido',
+          text: 'Completa los campos adecuadamente',
+          icon: 'error',
+          confirmButtonText: 'Ok'
+        })
       }
+     
+    
+    
     }
-
     
     /**
      * Este metodo recibira un usuario del formulario y llamara 
@@ -165,7 +173,7 @@ constructor( private fb: FormBuilder,
        solucion = "error";
        localStorage.removeItem('jwt');
        Swal.fire({
-         title: 'Error al inciar sesión',
+         title: 'Error al registrar usuario',
          text: 'Vuelve a intentarlo',
          icon: 'error',
          confirmButtonText: 'Ok'

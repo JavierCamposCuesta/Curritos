@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AnuncioService } from 'src/app/services/anuncio.service';
-import { Anuncio, Categoria } from '../../interfaces/interface';
-import {MessageService} from 'primeng/api';
-import { PrimeNGConfig } from 'primeng/api';
+import { Anuncio, Categoria, Usuario } from '../../interfaces/interface';
+import {ConfirmationService, MessageService} from 'primeng/api';
+import { PrimeNGConfig, Message } from 'primeng/api';
 import { CategoriaService } from 'src/app/services/categoria.service';
 
 
@@ -10,7 +10,7 @@ import { CategoriaService } from 'src/app/services/categoria.service';
   selector: 'app-mis-curritos',
   templateUrl: './mis-curritos.component.html',
   styleUrls: ['./mis-curritos.component.css'],
-  providers: [MessageService]
+  providers: [ConfirmationService]
 })
 
 
@@ -18,9 +18,10 @@ export class MisCurritosComponent implements OnInit {
   constructor(private anuncioService: AnuncioService,
     private messageService: MessageService,
     private primengConfig: PrimeNGConfig,
-    private categoriaService: CategoriaService,) { }
+    private categoriaService: CategoriaService,  private confirmationService: ConfirmationService) { }
   
   ngOnInit(): void {
+    window.scrollTo(0,0)
     this.misAnuncios();
     this.misAnunciosTerminados();
     this.primengConfig.ripple = true;
@@ -30,13 +31,21 @@ export class MisCurritosComponent implements OnInit {
 
   listaMisAnuncios:Anuncio[]=[];
   listaMisAnunciosTerminados:Anuncio[]=[];
+  listaSolicitantes:Usuario[]=[];
   anuncioSeleccionado:Anuncio={};
+  //Con este atributo ocultamos o desolcultamos el componente de editar el anuncio
   dialogoVisible:boolean = false;
   first = 0;
 
   rows = 10;
   listaCategorias:Categoria[]=[];
+  msgs: Message[] = [];
+  displayBasic2: boolean = false;
+ 
 
+  /**
+   * Método para hacer la llamada y que cargue las categorias
+   */
   cargarCategorias(){
     this.categoriaService.mostrarCategorias().subscribe(resp =>{
       this.listaCategorias = resp.data;
@@ -48,9 +57,11 @@ export class MisCurritosComponent implements OnInit {
    * Este método resuelve la peticion de anuncioService, la cual dará una lista de anuncios que cargamos en la variable listaMisAnuncios
    */
   misAnuncios(){
+    this.dialogoVisible = false;
     this.anuncioService.misAnuncios().subscribe( resp => {
       this.listaMisAnuncios=resp;
       console.log(this.listaMisAnuncios.length)
+
     })
   }
 
@@ -109,6 +120,24 @@ export class MisCurritosComponent implements OnInit {
   
 }
 
+confirm1(idAnuncio: number) {
+  this.confirmationService.confirm({
+      message: '¿Estás seguro que quieres eliminar el anuncio?',
+      header: 'Confirmación',
+      icon: 'pi pi-exclamation-triangle',
+      acceptLabel: 'Si',
+      accept: () => {
+          this.msgs = [{severity:'info', summary:'Confirmar', detail:'Has borrado el anuncio', }];
+          this.borrarAnuncio(idAnuncio);
+      },
+      reject: () => {
+          this.msgs = [{severity:'info', summary:'Cancelar', detail:'Anuncio no borrado'}];
+      }
+  });
+}
+
+
+
 /**
  * Este metodo se llamará cuando se pulse el boton de finalizar anuncio, se llamará al servicio de anuncio y segun la respuesta se 
  * mostrará el mensaje correspondiente
@@ -129,6 +158,65 @@ finalizarAnuncio(idAnuncio: number){
  })
 }
 
+solicitanteAddAnuncio(idAnuncio: number, emailSolicitante: string){
+ 
+  this.anuncioService.solicitanteAddAnuncio(idAnuncio, emailSolicitante).subscribe({
+          
+    next:resp => {
+      this.closeBasicDialog2()
+   },
+   error: error =>{
+    this.showErrorFinalizarAnuncio();
+   } 
+ })
+}
+// finalizarAnuncio(idAnuncio: number, emailSolicitante:string){
+//   this.anuncioService.finalizarAnuncio(idAnuncio,  emailSolicitante).subscribe({
+          
+//     next:resp => {
+//       this.showSuccessFinalizarAnuncio()
+//       this.misAnuncios();
+//       this.misAnunciosTerminados();
+      
+//    },
+//    error: error =>{
+//     this.showErrorFinalizarAnuncio();
+//    } 
+//  })
+// }
+
+cargarListaSolicitantes(idAnuncio: number){
+  this.anuncioService.cargarListaSolicitantes(idAnuncio).subscribe({
+          
+    next:resp => {
+      console.log(resp)
+      this.listaSolicitantes = resp;
+      
+   },
+   error: error =>{
+    this.showErrorFinalizarAnuncio();
+   } 
+ })
+}
+
+// asignarAnuncioSolicitante(idSolicitante: string, idAnuncio: number){
+// this.anuncioService.asignarAnuncioSolicitante(idSolicitante, idAnuncio)
+// }
+
+showBasicDialog2(idAnuncio: number) {
+  this.cargarListaSolicitantes(idAnuncio);
+  this.displayBasic2 = true;
+}
+
+closeBasicDialog2() {
+  this.displayBasic2 = false;
+  console.log("entra en cerrar")
+}
+
+
+/**
+ * Metodo para elegir el solicitante que ha realizado el anuncio
+ */
 // elegirSolicitante(idAnuncio: Anuncio) {
 //   this.confirmationService.confirm({
 //       message: 'Are you sure that you want to perform this action?',

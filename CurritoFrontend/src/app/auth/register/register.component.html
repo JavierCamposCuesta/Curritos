@@ -20,10 +20,10 @@
 
             <!-- Apellidos -->
             <div class="col-md-8">
-              <input type="text" class="form-control" formControlName="apellidos" placeholder="Apellidos">
+              <input type="text" class="form-control" formControlName="apellidos" placeholder="Apellidos" maxlength="50">
               <span class="form-text text-danger"
                           *ngIf="campoNoValido('apellidos')">
-                        Debes introducir dos apellidos
+                        Debes introducir apellidos válidos
               </span>
             </div>
 
@@ -39,7 +39,7 @@
 
             <!-- Telefono -->
             <div class="col-md-4">
-              <input type="text" class="form-control" formControlName="telefono" placeholder="Teléfono">
+              <input type="text" class="form-control" formControlName="telefono" placeholder="Teléfono" maxlength="9">
               <span class="form-text text-danger"
                            *ngIf="campoNoValido('telefono')">
                          Deben ser 9 dígitos.
@@ -82,7 +82,7 @@
             </div>
            
 
-            <button class="btn btn-primary btn-lg btn-block w-50 ms-auto me-auto" type="submit" [disabled]="miFormulario.valid">Registrarme</button>
+            <button class="btn btn-primary btn-lg btn-block w-50 ms-auto me-auto" type="submit" [disabled]="!miFormulario.valid">Registrarme</button>
                
           </form>
           <div class="mt-1">
@@ -91,9 +91,9 @@
             <hr class="my-4">
 
               <div class="d-grid gap-2">
-                  <button class="btn btn-primary w-75 ms-auto me-auto" style="background-color: #dd4b39;" type="submit"><i class="bi bi-google pe-1"></i> Sign in with google</button>
+                  <button class="btn btn-primary w-75 ms-auto me-auto" style="background-color: #dd4b39;" type="submit" disabled><i class="bi bi-google pe-1"></i>Registrate con google</button>
 
-                  <button class="btn btn-primary mb-2 w-75 ms-auto me-auto" style="background-color: #3b5998;" type="submit"><i class="bi bi-facebook pe-1"></i>Sign in with facebook</button>
+                  <button class="btn btn-primary mb-2 w-75 ms-auto me-auto" style="background-color: #3b5998;" type="submit" disabled><i class="bi bi-facebook pe-1"></i>Registrate con facebook</button>
 
               </div>
           </div>

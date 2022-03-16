@@ -2,9 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FavoritesComponent } from './favorites/favorites.component';
 import { ProfileRoutingModule } from './profile-routing.module';
-import { SidebarComponent } from '../shared/sidebar/sidebar.component';
 import { SharedModule } from '../shared/shared.module';
-import { AuthGuard } from '../services/auth-guard.service';
 import { MessagesComponent } from './messages/messages.component';
 import { MisCurritosComponent } from './mis-curritos/mis-curritos.component';
 import { OpinionsComponent } from './opinions/opinions.component';
@@ -22,6 +20,7 @@ import {ButtonModule} from 'primeng/button';
 import { MiPerfilComponent } from './mi-perfil/mi-perfil.component';
 import { PublicProfileComponent } from './public-profile/public-profile.component';
 import { SolicitadosComponent } from './solicitados/solicitados.component';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 
 
@@ -51,7 +50,8 @@ import { SolicitadosComponent } from './solicitados/solicitados.component';
     CardModule,
     DialogModule,
     ToastModule,
-    ButtonModule
+    ButtonModule,
+    ConfirmDialogModule,
     
   ],
   exports: [

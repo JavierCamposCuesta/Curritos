@@ -13,6 +13,9 @@ export class SidebarComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  /**
+   * Método para cerrar sesión
+   */
   cerrarSesion(){
     localStorage.removeItem("jwt");
     this.router.navigate(["home"])

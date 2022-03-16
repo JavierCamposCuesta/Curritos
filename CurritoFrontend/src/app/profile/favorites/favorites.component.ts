@@ -13,9 +13,13 @@ export class FavoritesComponent implements OnInit {
   anunciosFavoritos:Anuncio[]=[];
 
   ngOnInit(): void {
+    window.scrollTo(0,0)
     this.cargarFavoritos()
   }
 
+  /**
+   * Metodo para cargar los anuncios favoritos, hace la llamada als servicio para ello
+   */
   cargarFavoritos(){
     this.anuncioService.cargarFavoritos().subscribe({
       next:resp => {
@@ -30,7 +34,11 @@ export class FavoritesComponent implements OnInit {
   }
 
   
-
+/**
+ * Metodo para borrar un anuncio de favoritos
+ * @param anuncio 
+ * @param evento 
+ */
   quitarFavorito(anuncio: Anuncio, evento:any){
     this.anuncioService.borrarFavorito(anuncio).subscribe({
       next:resp => {

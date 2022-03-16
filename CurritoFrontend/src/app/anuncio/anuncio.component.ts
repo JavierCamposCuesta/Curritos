@@ -11,14 +11,14 @@ export class AnuncioComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.busqueda)
+    
   }
 
   ngOnChanges(): void{
-    console.log(this.busqueda)
+   
   }
 
   buscar(){
-    console.log(this.busqueda);
+    
   }
 }

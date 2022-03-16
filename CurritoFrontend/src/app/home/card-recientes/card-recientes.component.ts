@@ -19,6 +19,9 @@ export class CardRecientesComponent implements OnInit {
 
   anunciosRecientes:Anuncio[]=[];
 
+  /**
+   * Metodo que hace la llamada para cargar los anuncios recientes
+   */
   cargarAnunciosRecientes(){
     this.anuncioService.cargarAnunciosRecientes().subscribe({
           
@@ -37,59 +40,77 @@ export class CardRecientesComponent implements OnInit {
    })
   }
 
-  //Metodos para añadir a favoritos
+/**
+ * Metodo para añadir anuncio a favorito, lo primero que hace es comprobar que el usuario esta logueado, posteriormente 
+ * comprueba la clase del icono de favoritos, segun cual sea llama a un método u otro
+ * @param anuncio 
+ * @param evento 
+ */
 addFavoritos(anuncio:Anuncio, evento:any) {
  
-  console.log(evento.target)
   
-   this.loginService.validarToken().subscribe({
-         
-    next:resp => {
-
-      if(evento.target.classList.contains("bi-heart-fill")){
-        console.log("clase correcta")
-        this.borrarFavorito(anuncio,evento)
-      }
-      else{
+  
+  this.loginService.validarToken().subscribe({
         
-        this.addFavoritosEstaLogueado(anuncio, evento)
-      }
-      
-   },
-   error: error =>{
+   next:resp => {
+
+     if(evento.target.classList.contains("bi-heart-fill")){
+       
+       this.borrarFavorito(anuncio,evento)
+     }
+     else{
+       
+       this.addFavoritosEstaLogueado(anuncio, evento)
+     }
      
-     this.router.navigate(['login'])
-   }
+  },
+  error: error =>{
+    
+    this.router.navigate(['login'])
+  }
+})
+}
+
+/**
+ * Metodo para añadir un anuncio a favorito, lo que hacemos es llamar al metodo del servicio e intercambiar las clases del icono de favorito
+ * @param anuncio 
+ * @param evento 
+ */
+addFavoritosEstaLogueado(anuncio: Anuncio, evento:any){
+ this.anuncioService.addFavorito(anuncio).subscribe({
+   next:resp => {
+     evento.target.classList.remove('bi-heart')
+     evento.target.classList.add("bi-heart-fill")
+  },
+  error: error =>{
+   
+   evento.target.classList.remove('bi-heart')
+     evento.target.classList.add("bi-heart-fill")
+   
+  }
+ })
+ 
+}
+
+/**
+ * Metodo para eliminar un anuncio de favoritos, intercambia las clases del icono de favoritos segun se elimine o no
+ * @param anuncio 
+ * @param evento 
+ */
+borrarFavorito(anuncio: Anuncio, evento:any){
+ this.anuncioService.borrarFavorito(anuncio).subscribe({
+   next:resp => {
+     evento.target.classList.add('bi-heart')
+       evento.target.classList.remove("bi-heart-fill")
+     
+  },
+  error: error =>{
+    
+   evento.target.classList.remove('bi-heart')
+     evento.target.classList.add("bi-heart-fill")
+   
+  }
  })
 }
-
-addFavoritosEstaLogueado(anuncio: Anuncio, evento:any){
-  this.anuncioService.addFavorito(anuncio).subscribe({
-    next:resp => {
-      evento.target.classList.remove('bi-heart')
-      evento.target.classList.add("bi-heart-fill")
-      console.log("Añadido correctamente")
-   },
-   error: error =>{
-    
-   }
-  })
-  
-}
-
-borrarFavorito(anuncio: Anuncio, evento:any){
-  this.anuncioService.borrarFavorito(anuncio).subscribe({
-    next:resp => {
-      evento.target.classList.add('bi-heart')
-        evento.target.classList.remove("bi-heart-fill")
-      console.log("borrado correctamente")
-   },
-   error: error =>{
-    
-    
-   }
-  })
-}
-
 
 }

@@ -15,7 +15,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./mi-perfil.component.css']
 })
 export class MiPerfilComponent implements OnInit {
-
+  
   miFormulario: FormGroup = this.fb.group({
     email: ['', [Validators.required, Validators.pattern(this.ValidatorRegistroService.emailPattern)],[this.ValidatorRegistroService]],
     password: ['', [ Validators.required, Validators.minLength(6)]  ],
@@ -66,7 +66,7 @@ export class MiPerfilComponent implements OnInit {
     
     
     ngOnInit(): void {
-      
+      window.scrollTo(0,0)
       this.miFormulario.reset({
         email: '',
         password: '',

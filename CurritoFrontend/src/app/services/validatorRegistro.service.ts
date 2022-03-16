@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AbstractControl, AsyncValidator, FormControl, FormGroup, ValidationErrors } from '@angular/forms';
-import { delay, map, Observable } from 'rxjs';
+import { catchError, delay, EMPTY, map, Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -11,13 +12,14 @@ import { delay, map, Observable } from 'rxjs';
  */
 export class ValidatorRegistroService implements AsyncValidator{
 
-  public apellidosPattern: string = '([a-zA-ZñÑ]+) ([a-zA-ZñÑ]+)';
+  public apellidosPattern: string = '[A-Za-z  ]{1,50}';
   public nombrePattern: string = '[A-Za-z  ]{1,50}';
   public emailPattern: string = "^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$";
   public telefonoPattern: string = "[0-9]+[0-9]+[0-9]+[0-9]+[0-9]+[0-9]+[0-9]+[0-9]+[0-9]";
 
 
   solucion: string= "";
+  private baseUrl: string = environment.baseUrl;
   constructor(private http: HttpClient) { }
 
 
@@ -63,27 +65,33 @@ export class ValidatorRegistroService implements AsyncValidator{
 
     const email = control.value;
     let respuesta : string ="";
-    console.log(email);
-    return this.http.get<any[]>(`http://localhost:8080/usuario?email=${ email}`)
+    return this.http.get<any>(`${this.baseUrl}/usuario?email=${ email}`)
                 .pipe(
                   //Timpo de respuesta en comprobar el resultado
                    delay(1500),
                   map( resp => {
-                    if(resp != null && resp.length == undefined){
+                    //Si la respuesta es true es que el email ya está en uso, por lo que debemos crear una nueva exepcion para email
+                    if(resp == true ){
                                 respuesta = "valido";
-                      
                                 control.get("email")?.setErrors({ emailTomado: true });
                           return { emailTomado: true }
                               }
                               else{
                       
                                 control.get("email")?.setErrors(null);
-                         respuesta = "noValido";
-                         return null
-                              }
-                  })
+ 
+ 
+                          return null;
+                               }
+                  }),
+                  catchError(error=> {
+                         return EMPTY;
+                })
+                  
                 );
 
   }
+
+
     
 }

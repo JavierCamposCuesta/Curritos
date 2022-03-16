@@ -45,6 +45,10 @@ export class AnuncioDetalleComponent implements OnInit {
   });
   }
 
+  /**
+   * Metodo que comprueba si el usuario esta logueado antes de solicitar un anuncio
+   * @param anuncio 
+   */
   solicitarCurritoComprobacion(anuncio: Anuncio){
     
     this.loginService.validarToken().subscribe({
@@ -61,6 +65,10 @@ export class AnuncioDetalleComponent implements OnInit {
    })
   }
 
+  /**
+   * Metodo para solicitar un anuncio, en caso de estar ya solicitado muestra un mensaje de advertencia
+   * @param anuncio 
+   */
   solicitarCurrito(anuncio: Anuncio){
     this.anuncioService.solicitarCurrito(anuncio).subscribe({
       next:resp => {

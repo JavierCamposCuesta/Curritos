@@ -11,7 +11,6 @@ import { SolicitadosComponent } from './solicitados/solicitados.component';
 
 
 const routes: Routes = [
-  // {
     
     { path: 'favorites',canActivate:[AuthGuard], component: FavoritesComponent },
     { path: 'addCurrito',canActivate:[AuthGuard], component: AddCurritoComponent },
@@ -20,12 +19,7 @@ const routes: Routes = [
     { path: 'my-profile',canActivate:[AuthGuard], component: MiPerfilComponent },
     { path: 'public-profile',canActivate:[AuthGuard], component: PublicProfileComponent },
     { path: '**', redirectTo: 'favorites' }
-    // path:'', canActivateChild:[AuthGuard], component: FavoritesComponent,
-    // children: [
-    //   { path: 'favorites', component: FavoritesComponent},
-    //   { path: '**', redirectTo: 'favorites' }
-    // ]
-  // }
+    
 ];
 
 @NgModule({

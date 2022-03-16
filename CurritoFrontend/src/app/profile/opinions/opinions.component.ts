@@ -10,6 +10,7 @@ export class OpinionsComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    window.scrollTo(0,0)
   }
 
 }

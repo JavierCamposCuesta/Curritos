@@ -8,7 +8,7 @@ import { NgEventBus } from 'ng-event-bus';
   styleUrls: ['./search.component.css']
 })
 export class SearchComponent implements OnInit {
-  @Output() onEnter: EventEmitter<string> = new EventEmitter();
+  // @Output() onEnter: EventEmitter<string> = new EventEmitter();
   busqueda: string = "";
   constructor(private eventBus: NgEventBus, private router: Router) { }
 

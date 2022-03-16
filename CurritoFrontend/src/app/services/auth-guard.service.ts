@@ -34,6 +34,13 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
       )
   }
 
+  /**
+   * Método que llama a validarToken del servicio y dependiendo del resultado permitirá o no 
+   * la entrada a la siguiente página
+   * @param route 
+   * @param state 
+   * @returns 
+   */
 canActivateChild(route: ActivatedRouteSnapshot, 
 
   state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
@@ -41,6 +48,11 @@ canActivateChild(route: ActivatedRouteSnapshot,
 return this.canActivate(route, state);
 }
 
+/**
+ * Método que llamará a validarToken del servicio y dependiendo del resultadó permitirá la carga del modulo o no
+ * @param route 
+ * @returns 
+ */
 canLoad(route: Route): Observable<boolean>|Promise<boolean>|boolean {
   return this.loginService.validarToken()
     .pipe(

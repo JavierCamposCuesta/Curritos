@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { waitForAsync } from '@angular/core/testing';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 import { Anuncio, Categoria, Data, LoginRespuesta } from 'src/app/interfaces/interface';
 import { addAnuncioService } from 'src/app/services/addAnuncio.service';
 import { AnuncioService } from 'src/app/services/anuncio.service';
@@ -32,6 +33,14 @@ export class AddCurritoComponent implements OnInit {
   @Input() anuncioEditar:Anuncio= {};
   titulo:string='';
   botonRegistro:string = '';
+  categoriaDefecto:string="Todas las categorias"
+  tipoPrecioDefecto:string="Por horas"
+
+  /**
+   * Lo emitimos para que se recargue el componente de mostrar los anuncios solicitados, una vez que hemos actualizado el anuncio
+   */
+  @Output()
+  recargarListado = new EventEmitter();
 
   
 
@@ -60,11 +69,12 @@ export class AddCurritoComponent implements OnInit {
     private router:Router,
     private categoriaService:CategoriaService,
     private addAnuncioService: addAnuncioService,
-    private anuncioService: AnuncioService ) { }
+    private anuncioService: AnuncioService,
+    private messageService: MessageService, ) { }
     
     
     ngOnInit(): void {
-      
+      window.scrollTo(0,0)
       this.miFormulario.reset({
         titulo: '',
         categoria: '',
@@ -93,7 +103,7 @@ export class AddCurritoComponent implements OnInit {
         precio: this.anuncioEditar.precio,
         tipoPrecio: this.anuncioEditar.tipoPrecio,
         descripcion: this.anuncioEditar.descripcion,
-        ubicacion: '',
+        ubicacion: this.anuncioEditar.ubicacion,
         id: this.anuncioEditar.id
       })
 
@@ -148,12 +158,13 @@ export class AddCurritoComponent implements OnInit {
           
   
       }
-      console.log(this.miFormulario);
+      
       this.anuncioService.addAnuncio(anuncio).subscribe({
           
         next:resp => {
           respuesta = resp;
-          // console.log(repuesta.jwt_token)
+          this.anuncioEditadoCorrectamente();
+          this.miFormulario.reset()
          if(respuesta.jwt_token != null){
            localStorage.setItem('jwt', respuesta.jwt_token);
            this.router.navigate(['home']);
@@ -177,6 +188,10 @@ export class AddCurritoComponent implements OnInit {
      })
       }
 
+      /**
+       * Metodo para editar un anuncio, recibimos un anuncio modificado y hacemos la llamada mandando el anuncio que queremos modificar y el 
+       * nuevo anuncio con los cambios modificados
+       */
       editarAnuncio(){
         let respuesta: LoginRespuesta = {};
         let solucion: string;
@@ -193,23 +208,14 @@ export class AddCurritoComponent implements OnInit {
           
   
       }
-      console.log(this.miFormulario);
       this.anuncioService.editAnuncio(anuncio).subscribe({
           
         next:resp => {
           respuesta = resp;
-          // console.log(repuesta.jwt_token)
-          
-          //  localStorage.setItem('jwt', respuesta.jwt_token);
-          //  this.router.navigate(['profile/misCurritos']);
-           Swal.fire({
-            title: 'Error al editar anuncio',
-            text: 'Vuelve a intentarlo',
-            icon: 'warning',
-            confirmButtonText: 'Ok'
-          })
-          window.location.reload();
-          //  solucion = "true";
+         
+          //emitimos el evento para que se recargue el componente
+          this.recargarListado.emit("");
+          // window.location.reload();
          
        },
        error(error){
@@ -248,7 +254,9 @@ export class AddCurritoComponent implements OnInit {
   }
   
   
+  //Mensajes
+  anuncioEditadoCorrectamente() {
+    this.messageService.add({severity:'success', summary: 'Eliminado', detail: 'El anuncio ha sido añadido correctamente'});
   }
-  
-  
+  }
   

@@ -8,6 +8,17 @@
     color: green;
 }
 
+.solicitante{
+    text-decoration: none;
+    list-style: none;
+    color: navy;
+}
+
+.solicitante:hover{
+    cursor: pointer;
+    background: rgb(233, 233, 233);
+}
+
 
 
 
