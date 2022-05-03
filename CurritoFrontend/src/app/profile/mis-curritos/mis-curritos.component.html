@@ -47,7 +47,7 @@
                   <td [routerLink]="['/anuncio-detalle', anuncio.id]" class='textoConPuntos ' ><span class="p-column-title" pSortableColumn="titulo"><strong>Título</strong></span>{{anuncio.titulo}}</td>
                   <td [routerLink]="['/anuncio-detalle', anuncio.id]"><span class="p-column-title" pSortableColumn="categoria"><strong>Categoría</strong></span>{{anuncio.categoria}}</td>
                   <td [routerLink]="['/anuncio-detalle', anuncio.id]"><span class="p-column-title" pSortableColumn="precio"><strong>Precio</strong></span>{{anuncio.precio}} €</td>
-                  <td [routerLink]="['/anuncio-detalle', anuncio.id]" style="overflow: hidden;"><span class="p-column-title" pSortableColumn="fechaAnuncio"><strong>Fecha</strong></span>{{anuncio.fechaAnuncio}}</td>
+                  <td [routerLink]="['/anuncio-detalle', anuncio.id]" style="overflow: hidden;"><span class="p-column-title" pSortableColumn="fechaAnuncio"><strong>Fecha</strong></span>{{anuncio.fechaAnuncio?.slice(0,10)}}</td>
                   <td class="ocultarMenor680" (click)="seleccionarEventoEditar(anuncio)"><span class="p-column-title " >Editar</span><a class="btn"><i class="bi bi-pencil-fill focusEditar"></i></a></td>
                   <td class="ocultarMenor680" (click)="confirm1(anuncio.id)"><span class="p-column-title ">Borrar</span><a class="btn"><i class="bi bi-trash-fill focusBorrar"></i></a></td>
 
@@ -115,8 +115,8 @@
                   <td ><span class="p-column-title" pSortableColumn="titulo"><strong>Título</strong></span>{{anuncioTerminado.titulo}}</td>
                   <td><span class="p-column-title" pSortableColumn="categoria"><strong>Categoría</strong></span>{{anuncioTerminado.categoria}}</td>
                   <td><span class="p-column-title" pSortableColumn="precio"><strong>Precio</strong></span>{{anuncioTerminado.precio}} €</td>
-                  <td><span class="p-column-title" pSortableColumn="fechaAnuncio"><strong>Fecha creación</strong></span>{{anuncioTerminado.fechaAnuncio}}</td>
-                  <td><span class="p-column-title" pSortableColumn="fechaFin"><strong>Fecha fin</strong></span>{{anuncioTerminado.fechaFin}}</td>
+                  <td><span class="p-column-title" pSortableColumn="fechaAnuncio"><strong>Fecha creación</strong></span>{{anuncioTerminado.fechaAnuncio?.slice(0,10)}}</td>
+                  <td><span class="p-column-title" pSortableColumn="fechaFin"><strong>Fecha fin</strong></span>{{anuncioTerminado.fechaFin?.slice(0,10)}}</td>
                   
               </tr>
           </ng-template>

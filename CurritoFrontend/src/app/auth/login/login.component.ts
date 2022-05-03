@@ -73,7 +73,9 @@ login(){
             respuesta = resp;
             if(respuesta.jwt_token != null){
               localStorage.setItem('jwt', respuesta.jwt_token);
-              this.router.navigate(['home']);
+              // this.router.navigate(["home"])
+              // De esta forma conseguimos que se recarge la página al entrar al home y se lancen las peticiones necesarias
+              location.replace("home") // replace
               solucion = "true";
             }
           },

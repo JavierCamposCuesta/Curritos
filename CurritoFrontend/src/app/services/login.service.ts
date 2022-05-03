@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { LoginRespuesta } from '../interfaces/interface';
+import { LoginRespuesta, Usuario } from '../interfaces/interface';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
@@ -49,12 +49,12 @@ private estado: boolean = false;
    * Método para validar el token del localStorage
    * @returns 
    */
-  validarToken():Observable<LoginRespuesta>{
+  validarToken():Observable<Usuario>{
     const url = `${ this.baseUrl }/comprobarToken`;
     const headers = new HttpHeaders()
       .set('Authorization', `Bearer ${localStorage.getItem('jwt')}` || '' );
 
-    return this.http.get<LoginRespuesta>( url, { headers } )
+    return this.http.get<Usuario>( url, { headers } )
   }
 
 

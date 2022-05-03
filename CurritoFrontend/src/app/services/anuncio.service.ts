@@ -78,10 +78,19 @@ export class AnuncioService {
    * @param user 
    * @returns Un observable con el resultado de la petición
    */
- addAnuncio(anuncio:Anuncio){
+ addAnuncio(anuncio:Anuncio, file:File){
   const url = `${this.baseUrl}/anuncio`;
   const headers = this.cargarHeaders();
-    return this.http.post(url, anuncio, {headers});
+console.log(file);
+  const formData: FormData = new FormData();
+    formData.append('file', file);
+    formData.append('titulo', anuncio.titulo!);
+    formData.append('categoria', anuncio.categoria!);
+    formData.append('precio', anuncio.precio!.toString());
+    formData.append('tipoPrecio', anuncio.tipoPrecio!);
+    formData.append('descripcion', anuncio.descripcion!);
+    formData.append('ubicacion', anuncio.ubicacion!);
+    return this.http.post(url, formData, {headers});
 }
 
  /**

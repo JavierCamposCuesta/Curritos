@@ -8,13 +8,16 @@
             <div class="row d-flex m-2 ms-0 me-0 pt-3 pb-2" style="top: 64px; position: sticky; z-index: 2;
             transition: top 150ms ease; background: white;"> 
               <div class="col-6 text-start">
-                <h5 class="card-title letraResponsivaDescripcion">{{anuncioDetalle.autorAnuncio?.nombre}}</h5>
+                <h5 class="card-title letraResponsivaDescripcion">{{anuncioDetalle.autorAnuncio?.nombre?.charAt(0)?.toUpperCase()}}{{anuncioDetalle.autorAnuncio?.nombre?.slice(1)}} {{anuncioDetalle.autorAnuncio?.apellidos?.charAt(0)?.toUpperCase()}}</h5>
               </div>
-              <div class="col-6" *ngIf="anuncioDetalle.finalizado == false">
+              <div class="col-6" *ngIf="anuncioDetalle.finalizado == false && anuncioDetalle.autorAnuncio?.email != usuarioRegistrado.email">
                 <a (click)="solicitarCurritoComprobacion(anuncioDetalle)" class="btn btn-primary col-12">Solicitar Currito</a>
               </div>
-              <div class="col-6" *ngIf="anuncioDetalle.finalizado == true">
-                <button disabled  class="btn btn-primary col-12">Currito finalizado</button>
+              <div class="col-6" *ngIf="anuncioDetalle.finalizado == true && anuncioDetalle.autorAnuncio?.email != usuarioRegistrado.email">
+                <button disabled  class="btn btn-primary col-12">Ya ha sido realizado</button>
+              </div>
+              <div class="col-6" *ngIf="anuncioDetalle.autorAnuncio?.email == usuarioRegistrado.email">
+                <a [routerLink]="['/profile/misCurritos']" class="btn btn-primary col-12">Editar anuncio</a>
               </div>
             </div>
 
@@ -63,7 +66,7 @@
 
               </div>
               <div>
-                <p class="card-text letraResponsivaTipoPrecio text-end mb-3 mt-3">{{anuncioDetalle.fechaAnuncio}}</p>
+                <p class="card-text letraResponsivaTipoPrecio text-end mb-3 mt-3">{{anuncioDetalle.fechaAnuncio?.toString()?.slice(0,10)}}</p>
               </div>
               <!-- <div class="col-6 text-start">
                 <h5 class="card-title letraResponsivaDescripcion">Javier Campos</h5>

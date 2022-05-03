@@ -1,4 +1,5 @@
 import { HttpClient } from '@angular/common/http';
+import { Byte } from '@angular/compiler/src/util';
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { waitForAsync } from '@angular/core/testing';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -52,7 +53,8 @@ export class AddCurritoComponent implements OnInit {
     descripcion: [''  ],
     // file: ['', [ Validators.required, Validators.pattern(this.ValidatorRegistroService.nombrePattern)]  ],
     ubicacion: ['' ],
-    id:['']
+    id:[''],
+    imagen:['']
   },
   {
   
@@ -82,7 +84,8 @@ export class AddCurritoComponent implements OnInit {
         tipoPrecio: '',
         descripcion: '',
         ubicacion: '',
-        id:''
+        id:'',
+        imagen:''
       })
 
       this.titulo = "Nuevo Currito";
@@ -105,6 +108,7 @@ export class AddCurritoComponent implements OnInit {
         descripcion: this.anuncioEditar.descripcion,
         ubicacion: this.anuncioEditar.ubicacion,
         id: this.anuncioEditar.id
+        
       })
 
       this.titulo= "Editar Currito";
@@ -152,14 +156,10 @@ export class AddCurritoComponent implements OnInit {
           "tipoPrecio": this.miFormulario.get("tipoPrecio")?.value,
           "descripcion": this.miFormulario.get("descripcion")?.value,
           "ubicacion": this.miFormulario.get("ubicacion")?.value
-          
-
-          
-          
-  
       }
+      let file = this.miFormulario.get("imagen")?.value;
       
-      this.anuncioService.addAnuncio(anuncio).subscribe({
+      this.anuncioService.addAnuncio(anuncio, file).subscribe({
           
         next:resp => {
           respuesta = resp;
@@ -187,6 +187,7 @@ export class AddCurritoComponent implements OnInit {
        
      })
       }
+
 
       /**
        * Metodo para editar un anuncio, recibimos un anuncio modificado y hacemos la llamada mandando el anuncio que queremos modificar y el 

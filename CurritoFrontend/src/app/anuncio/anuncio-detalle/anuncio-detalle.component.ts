@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
-import { Anuncio } from 'src/app/interfaces/interface';
+import { Anuncio, Usuario } from 'src/app/interfaces/interface';
 import { AnuncioService } from 'src/app/services/anuncio.service';
 import { LoginService } from 'src/app/services/login.service';
 
@@ -19,9 +19,30 @@ export class AnuncioDetalleComponent implements OnInit {
     private messageService: MessageService,) {}
 
   anuncioDetalle: Anuncio = {}
+  usuarioRegistrado: Usuario={
+    email: '',
+    password: '',
+    nombre: '',
+    apellidos: '',
+    telefono: '',
+    fechaNacimiento: '',
+    ubicacion: ''
+   };
 
   ngOnInit(): void {
     this.sacarParametroRuta();
+    this.conseguirUsuarioRegistrado();
+  }
+
+  conseguirUsuarioRegistrado(){
+    this.loginService.validarToken().subscribe({
+        
+      next:resp => {
+        this.usuarioRegistrado = resp;
+     },
+     error: error =>{
+     }
+   })
   }
 
  

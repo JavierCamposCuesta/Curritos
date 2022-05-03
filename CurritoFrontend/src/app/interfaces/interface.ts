@@ -1,3 +1,5 @@
+import { Byte } from "@angular/compiler/src/util";
+
 export interface Categoria {
     nombre:        string;
     listaAnuncios: any[];
@@ -53,5 +55,6 @@ export interface Anuncio {
     autorAnuncio?: Usuario;
     ubicacion?: string;
     comentario?: any;
+    imagen?: Byte[]
 }
 

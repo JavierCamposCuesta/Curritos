@@ -21,7 +21,8 @@ export class CarruselComponent implements OnInit {
         {
             breakpoint: '1024px',
             numVisible: 6,
-            numScroll: 3
+            numScroll: 3,
+            
         },
         {
             breakpoint: '768px',
