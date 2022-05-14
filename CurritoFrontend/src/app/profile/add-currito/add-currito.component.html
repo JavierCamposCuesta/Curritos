@@ -63,7 +63,7 @@
                             <i class="bi bi-image navy" alt ="Click aquí para subir tu foto" title ="Click aquí para subir tu foto" ></i>
                         </label>
                     
-                        <input id="file-input" type="file" formControlName="imagen"/>
+                        <input id="file-input" type="file" formControlName="imagen" (change)="selectFile($event)"/>
                         <!-- <app-upload-image></app-upload-image> -->
                         
                     </div>

@@ -1,4 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Byte } from '@angular/compiler/src/util';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Anuncio, Usuario } from '../interfaces/interface';
@@ -81,7 +82,7 @@ export class AnuncioService {
  addAnuncio(anuncio:Anuncio, file:File){
   const url = `${this.baseUrl}/anuncio`;
   const headers = this.cargarHeaders();
-console.log(file);
+
   const formData: FormData = new FormData();
     formData.append('file', file);
     formData.append('titulo', anuncio.titulo!);
@@ -90,6 +91,7 @@ console.log(file);
     formData.append('tipoPrecio', anuncio.tipoPrecio!);
     formData.append('descripcion', anuncio.descripcion!);
     formData.append('ubicacion', anuncio.ubicacion!);
+
     return this.http.post(url, formData, {headers});
 }
 
@@ -98,10 +100,20 @@ console.log(file);
    * @param user 
    * @returns Un observable con el resultado de la petición
    */
-  editAnuncio(anuncio:Anuncio){
+  editAnuncio(anuncio:Anuncio, file:File){
     const url = `${this.baseUrl}/anuncio/${anuncio.id}`;
     const headers = this.cargarHeaders();
-      return this.http.put(url, anuncio, {headers});
+
+    const formData: FormData = new FormData();
+    formData.append('file', file);
+    formData.append('titulo', anuncio.titulo!);
+    formData.append('categoria', anuncio.categoria!);
+    formData.append('precio', anuncio.precio!.toString());
+    formData.append('tipoPrecio', anuncio.tipoPrecio!);
+    formData.append('descripcion', anuncio.descripcion!);
+    formData.append('ubicacion', anuncio.ubicacion!);
+
+      return this.http.put(url, formData, {headers});
   }
 
   /**
@@ -233,6 +245,24 @@ solicitarCurrito(anuncio: Anuncio){
   const url = `${this.baseUrl}/anuncios-solicitados`;
   const headers = this.headers;
   return this.http.post(url, anuncio, {headers});
+}
+
+/**
+ * Método para convertir un array de bytes en una url correspondiente a una imagen
+ * @param file El parametro de tipo byte que le pasamos para que lo convierta en una url
+ * @returns url | null
+ */
+getImage(file: Byte[]) {
+  if(file != null){
+    const base64String = btoa(
+      String.fromCharCode(...new Uint8Array(file))
+    );
+    const source = `data:image/png;base64,${base64String}` + file;
+    return source;
+  }
+  else{
+    return null;
+  }
 }
 
 }

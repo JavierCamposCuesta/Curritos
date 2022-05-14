@@ -55,6 +55,6 @@ export interface Anuncio {
     autorAnuncio?: Usuario;
     ubicacion?: string;
     comentario?: any;
-    imagen?: Byte[]
+    file?: Byte[]
 }
 

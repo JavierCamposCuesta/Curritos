@@ -1,3 +1,4 @@
+import { Byte } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
 import { Anuncio } from 'src/app/interfaces/interface';
 import { AnuncioService } from 'src/app/services/anuncio.service';
@@ -41,6 +42,15 @@ export class SolicitadosComponent implements OnInit {
       this.listaMisAnunciosRealizados=resp;
       
     })
+  }
+
+  /**
+   * Método que llama a getImage del servicio y transforma un array de bytes en una url correspondiente a una imagen
+   * @param file 
+   * @returns 
+   */
+   getImage(file: Byte[]) {
+    return this.anuncioService.getImage(file);
   }
 
 }

@@ -4,6 +4,7 @@ import { Anuncio, Categoria, Usuario } from '../../interfaces/interface';
 import {ConfirmationService, MessageService} from 'primeng/api';
 import { PrimeNGConfig, Message } from 'primeng/api';
 import { CategoriaService } from 'src/app/services/categoria.service';
+import { Byte } from '@angular/compiler/src/util';
 
 
 @Component({
@@ -41,6 +42,7 @@ export class MisCurritosComponent implements OnInit {
   listaCategorias:Categoria[]=[];
   msgs: Message[] = [];
   displayBasic2: boolean = false;
+  foto: string = "";
  
 
   /**
@@ -60,9 +62,18 @@ export class MisCurritosComponent implements OnInit {
     this.dialogoVisible = false;
     this.anuncioService.misAnuncios().subscribe( resp => {
       this.listaMisAnuncios=resp;
-      console.log(this.listaMisAnuncios.length)
+      
 
     })
+  }
+
+  /**
+   * Método que llama a getImage del servicio y transforma un array de bytes en una url correspondiente a una imagen
+   * @param file 
+   * @returns 
+   */
+  getImage(file: Byte[]) {
+    return this.anuncioService.getImage(file);
   }
 
    /**

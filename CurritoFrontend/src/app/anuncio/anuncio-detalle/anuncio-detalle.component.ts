@@ -1,3 +1,4 @@
+import { Byte } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
@@ -102,6 +103,15 @@ export class AnuncioDetalleComponent implements OnInit {
      }
     })
   }
+
+   /**
+   * Método que llama a getImage del servicio y transforma un array de bytes en una url correspondiente a una imagen
+   * @param file 
+   * @returns 
+   */
+    getImage(file: Byte[]) {
+      return this.anuncioService.getImage(file);
+    }
 
 
   //Mensajes
