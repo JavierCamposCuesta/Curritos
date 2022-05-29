@@ -9,6 +9,7 @@ import { SelectItem, PrimeNGConfig } from 'primeng/api';
 import {SelectButtonModule} from 'primeng/selectbutton';
 import { LoginService } from 'src/app/services/login.service';
 import { catchError, map, Observable, of } from 'rxjs';
+import { Byte } from '@angular/compiler/src/util';
 
 
 @Component({
@@ -179,6 +180,14 @@ borrarFavorito(anuncio: Anuncio, evento:any){
   })
 }
 
+/**
+   * Método que llama a getImage del servicio y transforma un array de bytes en una url correspondiente a una imagen
+   * @param file 
+   * @returns 
+   */
+ getImage(file: Byte[]) {
+  return this.anuncioService.getImage(file);
+}
 
  
   

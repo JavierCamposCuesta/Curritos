@@ -1,3 +1,4 @@
+import { Byte } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Anuncio } from 'src/app/interfaces/interface';
@@ -111,6 +112,15 @@ borrarFavorito(anuncio: Anuncio, evento:any){
    
   }
  })
+}
+
+/**
+   * Método que llama a getImage del servicio y transforma un array de bytes en una url correspondiente a una imagen
+   * @param file 
+   * @returns 
+   */
+ getImage(file: Byte[]) {
+  return this.anuncioService.getImage(file);
 }
 
 }

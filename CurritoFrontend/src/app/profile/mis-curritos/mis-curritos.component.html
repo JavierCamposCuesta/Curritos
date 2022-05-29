@@ -57,7 +57,7 @@
                   <td class=" justify-content-evenly ocultarMayor679">
                     <a class="btn fs-5" (click)="seleccionarEventoEditar(anuncio)"><i class="bi bi-pencil-fill focusEditar"></i></a>
                     <a class="btn fs-5" (click)="borrarAnuncio(anuncio.id)"><i class="bi bi-trash-fill focusBorrar"></i></a>
-                    <a class="btn fs-5" (click)="seleccionarEventoEditar(anuncio)"><i class="bi bi-check2-square focusFinalizado"></i></a>
+                    <a class="btn fs-5" (click)="showBasicDialog2(anuncio.id)"><i class="bi bi-check2-square focusFinalizado"></i></a>
                   </td>
               </tr>
 
@@ -66,8 +66,11 @@
                 <h5 class="text-center mt-0 pt-0" *ngIf="this.listaSolicitantes.length ==0; ">Ningún usuario ha solicitado el anuncio</h5>
                 <h5 class="text-center mt-0 pt-0" style="margin-top: -80px; padding-top: -50px;" *ngIf="this.listaSolicitantes.length >0;">¿Qué usuario ha realizado el anuncio?</h5>
               
-                
-                  <li class="solicitante text-center" *ngFor="let solicitante of listaSolicitantes" (click)="finalizarAnuncio(anuncio.id)" (click)="solicitanteAddAnuncio(anuncio.id, solicitante.email)">
+                  <!-- borrar -  forma antigua de hacerlo, lo dejo de muestra -->
+                  <!-- <li class="solicitante text-center" *ngFor="let solicitante of listaSolicitantes" (click)="finalizarAnuncio(anuncio.id)" (click)="solicitanteAddAnuncio(anuncio.id, solicitante.email)">
+                    {{solicitante.nombre}} {{solicitante.apellidos}}
+                  </li> -->
+                  <li class="solicitante text-center" *ngFor="let solicitante of listaSolicitantes" (click)="showDialogoComentario(anuncio, solicitante)">
                     {{solicitante.nombre}} {{solicitante.apellidos}}
                   </li>
                 
@@ -79,9 +82,39 @@
               </p-dialog>
               <!-- Fin dialogo -->
 
-          </ng-template>
+              
+            </ng-template>
+
+          </p-table>
+
+          <!-- Dialogo para añadir un comentario al usuario que realiza el trabajo -->
+          <p-dialog [(visible)]="dialogoComentario"  [responsive]="true" position='center' [style]="{width: '60vw'}" [baseZIndex]="10000">
+            <h3 class="text-center mt-0 pt-0" style="margin-top: -100px; padding-top: -50px;  margin-bottom: 30px;">¿Cómo ha sido tu experiencia con {{solicitante.nombre}} {{solicitante.apellidos}}?</h3>
+
+              <form autocomplete="off"  [formGroup]="formComentario" (ngSubmit) = "submitComentario(anuncioComentar.id!, solicitante.email!)"  class="row g-3">
+              
+                <div class="col-md-12 text-center">
+                  <h5 class="text-center mt-0 pt-0" style="margin-top: -100px; padding-top: -50px;">Puntúa tu experencia</h5>
+
+                <p-rating formControlName="puntuacionEstrellas" [cancel]="false"></p-rating>
+
+                <h5 class="text-center mt-2 pt-0" >Cuéntanos que tal ha ido</h5>
+                <textarea class="col-12 mb-4" formControlName="textoComentario" placeholder="Escribe un breve resumen de tu experiencia"></textarea>
+                <button class="btn btn-primary btn-lg btn-block w-50 ms-auto me-auto" type="submit" [disabled]="!formComentario.valid">Valorar</button>
+              </div>
+              <div>
+                <h5 style="margin-bottom: 0px; margin-top: 50px; text-align: center; color: rgb(173, 173, 173);">Si no haces una valoración no podrás finalizar el anuncio</h5>
+              </div>
+
+                 
+            </form>
           
-        </p-table>
+            
+            <ng-template pTemplate="footer">
+                <p-button icon="pi pi-times" (click)="closeBasicDialog2()" label="Cerrar" styleClass="p-button-text"></p-button>
+            </ng-template>
+          </p-dialog>
+          <!-- Fin dialogo -->
 
         <!-- Mensaje que se mostrará si no hay ningún currito publicado -->
         <div *ngIf="this.listaMisAnuncios.length == 0" class="w-100 text-center navy mt-5">

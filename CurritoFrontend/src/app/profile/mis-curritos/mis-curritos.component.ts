@@ -5,6 +5,10 @@ import {ConfirmationService, MessageService} from 'primeng/api';
 import { PrimeNGConfig, Message } from 'primeng/api';
 import { CategoriaService } from 'src/app/services/categoria.service';
 import { Byte } from '@angular/compiler/src/util';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import Swal from 'sweetalert2';
+
+
 
 
 @Component({
@@ -19,7 +23,9 @@ export class MisCurritosComponent implements OnInit {
   constructor(private anuncioService: AnuncioService,
     private messageService: MessageService,
     private primengConfig: PrimeNGConfig,
-    private categoriaService: CategoriaService,  private confirmationService: ConfirmationService) { }
+    private categoriaService: CategoriaService,  
+    private confirmationService: ConfirmationService,
+    private fb: FormBuilder) { }
   
   ngOnInit(): void {
     window.scrollTo(0,0)
@@ -27,9 +33,13 @@ export class MisCurritosComponent implements OnInit {
     this.misAnunciosTerminados();
     this.primengConfig.ripple = true;
     this.cargarCategorias();
-    
-  }
 
+    this.formComentario.reset({
+      textoComentario: '',
+      puntuacionEstrellas: 3
+    })
+  }
+  
   listaMisAnuncios:Anuncio[]=[];
   listaMisAnunciosTerminados:Anuncio[]=[];
   listaSolicitantes:Usuario[]=[];
@@ -37,13 +47,21 @@ export class MisCurritosComponent implements OnInit {
   //Con este atributo ocultamos o desolcultamos el componente de editar el anuncio
   dialogoVisible:boolean = false;
   first = 0;
-
+  
   rows = 10;
   listaCategorias:Categoria[]=[];
   msgs: Message[] = [];
   displayBasic2: boolean = false;
+  dialogoComentario: boolean = false;
   foto: string = "";
- 
+  anuncioComentar: Anuncio={};
+  solicitante: Usuario = {};
+  
+  formComentario: FormGroup = this.fb.group({
+    textoComentario: ['', [Validators.required]],
+    puntuacionEstrellas: [3, [ Validators.required]  ]
+    
+  })
 
   /**
    * Método para hacer la llamada y que cargue las categorias
@@ -88,10 +106,6 @@ export class MisCurritosComponent implements OnInit {
        error:error =>{
         
        }
-  
-       
-       
-       
      })
     }
 
@@ -149,13 +163,33 @@ confirm1(idAnuncio: number) {
 
 
 
+// /**
+//  * Este metodo se llamará cuando se pulse el boton de finalizar anuncio, se llamará al servicio de anuncio y segun la respuesta se 
+//  * mostrará el mensaje correspondiente
+//  * @param idAnuncio 
+//  */
+// finalizarAnuncio(idAnuncio: number){
+//   this.anuncioService.finalizarAnuncio(idAnuncio).subscribe({
+          
+//     next:resp => {
+//       this.showSuccessFinalizarAnuncio()
+//       this.misAnuncios();
+//       this.misAnunciosTerminados();
+      
+//    },
+//    error: error =>{
+//     this.showErrorFinalizarAnuncio();
+//    } 
+//  })
+// }
+
 /**
  * Este metodo se llamará cuando se pulse el boton de finalizar anuncio, se llamará al servicio de anuncio y segun la respuesta se 
  * mostrará el mensaje correspondiente
  * @param idAnuncio 
  */
-finalizarAnuncio(idAnuncio: number){
-  this.anuncioService.finalizarAnuncio(idAnuncio).subscribe({
+ finalizarAnuncio(idAnuncio: number, emailSolicitante: string, textoComentario: string, puntuacionEstrellas: number){
+  this.anuncioService.finalizarAnuncio(idAnuncio, emailSolicitante, textoComentario, puntuacionEstrellas).subscribe({
           
     next:resp => {
       this.showSuccessFinalizarAnuncio()
@@ -167,6 +201,28 @@ finalizarAnuncio(idAnuncio: number){
     this.showErrorFinalizarAnuncio();
    } 
  })
+}
+
+/**
+     * Metodo para subir el forumario
+     */
+ submitComentario(idAnuncio: number, emailSolicitante: string) {
+  this.formComentario.markAllAsTouched();
+  if(this.formComentario.valid){
+    this.finalizarAnuncio(idAnuncio, emailSolicitante, this.formComentario.get("textoComentario")?.value, this.formComentario.get("puntuacionEstrellas")?.value);
+
+  }
+  else{
+    Swal.fire({
+      title: 'El registro no es válido',
+      text: 'Completa los campos adecuadamente',
+      icon: 'error',
+      confirmButtonText: 'Ok'
+    })
+  }
+ 
+
+
 }
 
 solicitanteAddAnuncio(idAnuncio: number, emailSolicitante: string){
@@ -196,6 +252,10 @@ solicitanteAddAnuncio(idAnuncio: number, emailSolicitante: string){
 //  })
 // }
 
+/**
+ * Método para cargar la lista de solicitantes de un anuncio
+ * @param idAnuncio 
+ */
 cargarListaSolicitantes(idAnuncio: number){
   this.anuncioService.cargarListaSolicitantes(idAnuncio).subscribe({
           
@@ -221,7 +281,17 @@ showBasicDialog2(idAnuncio: number) {
 
 closeBasicDialog2() {
   this.displayBasic2 = false;
-  console.log("entra en cerrar")
+}
+
+showDialogoComentario(anuncio: Anuncio, solicitante: Usuario) {
+  this.anuncioComentar = anuncio;
+  this.solicitante = solicitante;
+  this.displayBasic2 = false;
+  this.dialogoComentario = true;
+}
+
+closeDialogoComentario() {
+  this.dialogoComentario = false;
 }
 
 
@@ -250,7 +320,7 @@ closeBasicDialog2() {
  * Este método muestra el mensaje verde con el texto indicado si ha sido posible terminar un anuncio
  */
  showSuccessFinalizarAnuncio() {
-  this.messageService.add({severity:'success', summary: 'Guardado', detail: 'El anuncio se ha añadido a terminados'});
+  this.messageService.add({severity:'success', summary: 'Guardado', detail: 'Comentario enviado correctamente'});
 }
 
 /**
@@ -264,7 +334,7 @@ showError() {
  * Este método muestra el mensaje rojo con el texto indicado si no ha sido posible terminar un anuncio
  */
  showErrorFinalizarAnuncio() {
-  this.messageService.add({severity:'error', summary: 'Error', detail: 'No se ha podido finalizar el anuncio'});
+  this.messageService.add({severity:'error', summary: 'Error', detail: 'No se ha podido enviar el comentario'});
 }
 
 

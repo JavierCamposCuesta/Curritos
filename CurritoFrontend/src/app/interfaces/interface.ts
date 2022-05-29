@@ -24,8 +24,8 @@ export interface LoginRespuesta {
 }
 
 export interface Usuario {
-    email: string;
-    password: string;
+    email?: string;
+    password?: string;
     nombre?: string;
     apellidos?: string;
     telefono?: string;

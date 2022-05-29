@@ -79,12 +79,12 @@ export class AnuncioService {
    * @param user 
    * @returns Un observable con el resultado de la petición
    */
- addAnuncio(anuncio:Anuncio, file:File){
+ addAnuncio(anuncio:Anuncio, file:File | undefined){
   const url = `${this.baseUrl}/anuncio`;
   const headers = this.cargarHeaders();
 
   const formData: FormData = new FormData();
-    formData.append('file', file);
+    formData.append('file', file!);
     formData.append('titulo', anuncio.titulo!);
     formData.append('categoria', anuncio.categoria!);
     formData.append('precio', anuncio.precio!.toString());
@@ -127,16 +127,31 @@ export class AnuncioService {
       return this.http.delete(url, {headers});
   }
 
-  /**
+  // /**
+  //  * Método para marcar un anuncio como finalizado, le pasamos el id del anuncio y hará la llamada correspondiente a la API
+  //  * @param idAnuncio 
+  //  * @returns 
+  //  */
+  // finalizarAnuncio(idAnuncio: number){
+  //   const url = `${this.baseUrl}/anuncio/${idAnuncio}/finalizar-anuncio`;
+  //   const headers = this.cargarHeaders();
+  //     return this.http.get(url, {headers});
+  // }
+    /**
    * Método para marcar un anuncio como finalizado, le pasamos el id del anuncio y hará la llamada correspondiente a la API
    * @param idAnuncio 
    * @returns 
    */
-  finalizarAnuncio(idAnuncio: number){
-    const url = `${this.baseUrl}/anuncio/${idAnuncio}/finalizar-anuncio`;
-    const headers = this.cargarHeaders();
-      return this.http.get(url, {headers});
-  }
+     finalizarAnuncio(idAnuncio: number, emailSolicitante: string, textoComentario: string, puntuacionEstrellas: number){
+      console.log(emailSolicitante)
+      const url = `${this.baseUrl}/anuncio/${idAnuncio}/finalizar-anuncio`;
+      const headers = this.cargarHeaders();
+      const formData: FormData = new FormData();
+      formData.append('emailSolicitante', emailSolicitante);
+      formData.append('textoComentario', textoComentario);
+      formData.append('puntuacionEstrellas', puntuacionEstrellas.toString());
+        return this.http.put(url, formData, {headers});
+    }
   
 
   cargarListaSolicitantes(idAnuncio: number){
