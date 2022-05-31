@@ -22,13 +22,42 @@
               </a>
             </li>
             <li class="nav-item d-flex d-md-none d-lg-none d-xl-flex">
-              <i
+
+              <!-- Cambiamos el icono segun el numero de notificaciones -->
+              <i *ngIf="listaNotificaciones.length == 0" 
                 class="bi bi-chat-dots"
-                style="color: white; font-size: 1.5em"
+                style="color: white; font-size: 1.5em; z-index: 2;" 
               ></i>
-              <a class="nav-link text-white" aria-current="page" [routerLink]="['messages']">
-                <h5>Mis Mensajes</h5>
-              </a>
+              <i *ngIf="listaNotificaciones.length != 0" 
+                class="bi bi-chat-dots"
+                style="color: white; font-size: 1.5em; z-index: 2;"   pBadge value="{{listaNotificaciones.length}}" severity="danger"
+              ></i>
+              <!-- <a class="nav-link text-white" aria-current="page" [routerLink]="['messages']">
+                <h5  pBadge value="2" severity="danger">Notificaciones</h5>
+              </a> -->
+              <div id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                  <li class="nav-item dropdown rounded-3" style="background-color: navy;">
+                    
+                    <a class="nav-link text-white" aria-current="page" role="button" data-bs-toggle="dropdown" aria-expanded="false" >
+                      <h5>Notificaciones</h5>
+                    </a>
+                    <div  class="dropdown-menu dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="margin-left: -11vw;">
+                      <div  class="row row-cols-lg-8 row-cols-xl-8 p-2 ms-3 text-start" style="width: 30vw;"> 
+                        <h5>Comentarios pendiente</h5>
+                        <div *ngFor="let notificacion of this.listaNotificaciones" class="col col-lg-12 col-xl-12 p-3 navy">
+                          <a [routerLink]="['profile/notification']" style="text-decoration: none;">
+                            <h5>Evalua a {{notificacion.usuarioComentado?.nombre}} como ofertante del trabajo que realizastes</h5>
+
+                          </a>
+                          
+                          
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
             </li>
             <li class="nav-item d-flex">
               <i

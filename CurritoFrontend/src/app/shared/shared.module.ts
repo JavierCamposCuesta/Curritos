@@ -11,6 +11,7 @@ import { RouterModule } from '@angular/router';
 import { UploadImageComponent } from './upload-image/upload-image.component';
 import { CardAnuncioComponent } from './card-anuncio/card-anuncio.component';
 import { FormsModule } from '@angular/forms';
+import {BadgeModule} from 'primeng/badge';
 
 
 
@@ -27,7 +28,8 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     RouterModule,
-    FormsModule
+    FormsModule,
+    BadgeModule
   ],
   exports:[
     SidebarComponent,

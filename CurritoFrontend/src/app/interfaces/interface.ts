@@ -58,3 +58,17 @@ export interface Anuncio {
     file?: Byte[]
 }
 
+export interface Comentario {
+    id?:           number;
+    usuarioComentado?: Usuario;
+    usuarioComentador?: Usuario;
+    textoComentario?: string;
+    fecha?: Date;
+    anuncio?: Anuncio;
+    puntuacionEstrellas?: number;
+    realizado?: boolean;
+    realizaste?: boolean;
+}
+
+
+

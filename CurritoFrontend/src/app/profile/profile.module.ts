@@ -22,6 +22,9 @@ import { PublicProfileComponent } from './public-profile/public-profile.componen
 import { SolicitadosComponent } from './solicitados/solicitados.component';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import {RatingModule} from 'primeng/rating';
+import { NotificationComponent } from './messages/notification/notification.component';
+import { ChatsComponent } from './messages/chats/chats.component';
+import { MessagesModule } from './messages/messages.module';
 
 
 
@@ -30,7 +33,6 @@ import {RatingModule} from 'primeng/rating';
   declarations: [
     ProfileComponent,
     FavoritesComponent,
-    MessagesComponent,
     ProfileComponent,
     MisCurritosComponent,
     OpinionsComponent,
@@ -53,7 +55,7 @@ import {RatingModule} from 'primeng/rating';
     ToastModule,
     ButtonModule,
     ConfirmDialogModule,
-    RatingModule,
+    RatingModule
     
   ],
   exports: [

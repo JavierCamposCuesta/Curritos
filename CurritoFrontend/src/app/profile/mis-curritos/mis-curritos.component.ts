@@ -195,6 +195,7 @@ confirm1(idAnuncio: number) {
       this.showSuccessFinalizarAnuncio()
       this.misAnuncios();
       this.misAnunciosTerminados();
+      this.closeDialogoComentario();
       
    },
    error: error =>{
