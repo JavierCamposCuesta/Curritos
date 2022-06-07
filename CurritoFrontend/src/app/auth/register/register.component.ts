@@ -32,7 +32,14 @@ export class RegisterComponent implements OnInit {
 }
 );
 
+formCodigo: FormGroup = this.fb.group({
+  codigoVerificacionIntroducido: ['', [ Validators.required, Validators.minLength(4), Validators.maxLength(4)]  ]
+})
+
 solucion: string = "";
+codVerificacionIntroducido: number= 1;
+codVerificacionCorrecto: number= 2;
+dialogoVerificacion: boolean = false;
 
 
 
@@ -62,7 +69,8 @@ constructor( private fb: FormBuilder,
   private ValidatorRegistroService: ValidatorRegistroService,
   private registerService: RegisterService,
   private http: HttpClient,
-  private router:Router ) { }
+  private router:Router
+ ) { }
   
   
   ngOnInit(): void {
@@ -139,6 +147,57 @@ constructor( private fb: FormBuilder,
     
     
     }
+
+    crearCodigoVerificacion(){
+      this.registerService.verificarUsuario(this.miFormulario.get("email")?.value).subscribe({
+        
+        next:resp => {
+          console.log(resp);
+          this.codVerificacionCorrecto = resp;
+       },
+       error(error){
+  
+         Swal.fire({
+           title: 'Error al enviar el código de verificación',
+           text: 'Vuelve a intentarlo',
+           icon: 'error',
+           confirmButtonText: 'Ok',
+           customClass:{
+            container: "swalFire",
+           }
+
+         })
+       }
+     })
+    }
+
+    /**
+     * Metodo que comprueba si el codigo que se introduce es igual al código de verificación generado 
+     * En caso de ser correcto se lanza el método para crear el usuario, en caso contrario se muestra un error
+     */
+    verificarUsuario(){
+      console.log(this.formCodigo.get("codigoVerificacionIntroducido")?.value)
+      if(this.formCodigo.get("codigoVerificacionIntroducido")?.value == this.codVerificacionCorrecto){
+        this.submitFormulario();
+      }
+      else{
+        Swal.fire({
+          title: 'Codigo de verificacion incorrecto',
+          text: 'Vuelve a intentarlo',
+          icon: 'error',
+          confirmButtonText: 'Ok'
+        })
+      }
+    }
+
+    abrirDialogoVerificacion() {
+      this.dialogoVerificacion = true;
+      this.crearCodigoVerificacion();
+    }
+
+    cerrarDialogoVerificacion() {
+      this.dialogoVerificacion = true;
+    }
     
     /**
      * Este metodo recibira un usuario del formulario y llamara 
@@ -165,7 +224,8 @@ constructor( private fb: FormBuilder,
         respuesta = resp;
        if(respuesta.jwt_token != null){
          localStorage.setItem('jwt', respuesta.jwt_token);
-         this.router.navigate(['home']);
+         // De esta forma conseguimos que se recarge la página al entrar al home y se lancen las peticiones necesarias
+         location.replace("home") // replace
          solucion = "true";
        }
      },

@@ -21,4 +21,9 @@ private baseUrl: string = environment.baseUrl;
     const url = `${this.baseUrl}/register`;
       return this.http.post<LoginRespuesta>(url, user);
   }
+
+  verificarUsuario(email: string){
+    const url = `${this.baseUrl}/verification`;
+      return this.http.post<number>(url, email);
+  }
 }
